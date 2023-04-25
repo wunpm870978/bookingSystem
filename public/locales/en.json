@@ -1,0 +1,19 @@
+{
+    "lang": "lang",
+    "email": "Email",
+    "password": "Password",
+    "login": {
+        "login": "Login",
+        "save_username": "Save Email",
+        "keep_login": "Keep Login"
+    },
+    "general": {
+        "confirm": "Confirm",
+        "cancel": "Cancel",
+        "loading": "Loading",
+        "filter": "Filter"
+    },
+    "course": {
+        "search_placetext": "Course ID/ Name/ Tutor"
+    }
+}

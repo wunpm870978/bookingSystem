@@ -1,0 +1,16 @@
+{
+    "lang": "語言",
+    "email": "電郵",
+    "password": "密碼",
+    "login": {
+        "login": "登入",
+        "save_username": "記住賬號",
+        "keep_login": "保持登入狀態"
+    },
+    "general": {
+        "confirm": "確定",
+        "cancel": "取消",
+        "loading": "加載中..."
+    }
+
+}

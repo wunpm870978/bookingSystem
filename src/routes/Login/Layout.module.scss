@@ -1,0 +1,28 @@
+.root {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+
+    .inputWrapper {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        width: 100%;
+        max-width: 350px;
+
+    }
+
+    .loginBtn {
+        display: inline-flex;
+        margin-top: 10px;
+        height: 40px;
+        border-radius: 6px;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        align-items: center;
+        justify-content: center;
+    }
+}
