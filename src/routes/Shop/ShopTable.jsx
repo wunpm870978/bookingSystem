@@ -1,9 +1,17 @@
-import React from "react";
-import { Badge, Dropdown, Space, Table } from 'antd';
+import React, { useState } from "react";
+import {
+    Badge, Dropdown, Space, Table,
+    Button, Drawer, Form, Input,
+    Select, TimePicker
+} from 'antd';
 import { DownOutlined } from '@ant-design/icons';
+import s from './ShopTable.module.scss'
+import i18n from "i18next";
+const { RangePicker } = TimePicker;
 
 
 const ShopProfile = () => {
+    const [isDrawerOpen, setIsDrawerOpen] = useState();
     const items = [
         {
             key: '1',
@@ -122,6 +130,14 @@ const ShopProfile = () => {
     }
     return (
         <React.Fragment>
+            <div className={s.btnWrapper}>
+                <Button onClick={() => setIsDrawerOpen(true)}>
+                    Create
+                </Button>
+            </div>
+            <div >
+                shopanme
+            </div>
             <Table
                 columns={columns}
                 expandable={{
@@ -130,6 +146,165 @@ const ShopProfile = () => {
                 }}
                 dataSource={data}
             />
+            <Drawer
+                title="Create a new account"
+                width={720}
+                placement='right'
+                onClose={() => setIsDrawerOpen(false)}
+                open={isDrawerOpen}
+                bodyStyle={{ paddingBottom: 80 }}
+                extra={
+                    <Space>
+                        <Button onClick={() => { }}>Cancel</Button>
+                        <Button onClick={() => { }} type="primary">
+                            Submit
+                        </Button>
+                    </Space>
+                }
+            >
+                <Form
+                    name="wrap"
+                    labelCol={{ span: 8 }}
+                    wrapperCol={{ span: 16 }}
+                    labelAlign="left"
+                    labelWrap
+                    colon={false}
+                    style={{
+                        maxWidth: 600,
+                    }}
+                >
+                    <Form.Item
+                        label={`${i18n.t('shop.district')}:`}
+                        name="district"
+                        rules={[
+                            {
+                                required: true,
+                            },
+                        ]}
+                    >
+                        <Select
+                            options={[
+                                {
+                                    label: i18n.t('hkarea.HK'),
+                                    options: [
+                                        {
+                                            label: i18n.t('hkarea.CnW'),
+                                            value: 'CnW',
+                                        },
+                                        {
+                                            label: i18n.t('hkarea.WC'),
+                                            value: 'WC',
+                                        },
+                                        {
+                                            label: i18n.t('hkarea.E'),
+                                            value: 'E',
+                                        },
+                                        {
+                                            label: i18n.t('hkarea.S'),
+                                            value: 'S',
+                                        },
+                                    ],
+                                },
+                                {
+                                    label: i18n.t('hkarea.KLN'),
+                                    options: [
+                                        {
+                                            label: i18n.t('hkarea.YTM'),
+                                            value: 'YTM',
+                                        },
+                                        {
+                                            label: i18n.t('hkarea.SSP'),
+                                            value: 'SSP',
+                                        },
+                                        {
+                                            label: i18n.t('hkarea.KLN_CITY'),
+                                            value: 'KLN_CITY',
+                                        },
+                                        {
+                                            label: i18n.t('hkarea.WTS'),
+                                            value: 'WTS',
+                                        },
+                                        {
+                                            label: i18n.t('hkarea.KT'),
+                                            value: 'KT',
+                                        },
+                                    ],
+                                },
+                                {
+                                    label: i18n.t('hkarea.NT'),
+                                    options: [
+                                        {
+                                            label: i18n.t('hkarea.NT_KT'),
+                                            value: 'NT_KT',
+                                        },
+                                        {
+                                            label: i18n.t('hkarea.TW'),
+                                            value: 'TW',
+                                        },
+                                        {
+                                            label: i18n.t('hkarea.TM'),
+                                            value: 'TM',
+                                        },
+                                        {
+                                            label: i18n.t('hkarea.YL'),
+                                            value: 'YL',
+                                        },
+                                        {
+                                            label: i18n.t('hkarea.N'),
+                                            value: 'N',
+                                        },
+                                        {
+                                            label: i18n.t('hkarea.TP'),
+                                            value: 'TP',
+                                        },
+                                        {
+                                            label: i18n.t('hkarea.ST'),
+                                            value: 'ST',
+                                        },
+                                        {
+                                            label: i18n.t('hkarea.SK'),
+                                            value: 'SK',
+                                        },
+                                        {
+                                            label: i18n.t('hkarea.I'),
+                                            value: 'I',
+                                        },
+                                    ],
+                                },
+                            ]}
+                        />
+                    </Form.Item>
+
+                    <Form.Item
+                        label={`${i18n.t('shop.address')}:`}
+                        name="address"
+                        rules={[
+                            {
+                                required: true,
+                            },
+                        ]}
+                    >
+                        <Input />
+                    </Form.Item>
+                    <Form.Item
+                        label={`${i18n.t('shop.business_hours')}:`}
+                        name="business_hours"
+                    >
+                        <RangePicker
+                            placeholder={[
+                                i18n.t('shop.start_time'),
+                                i18n.t('shop.end_time')
+                            ]}
+                        />
+                    </Form.Item>
+
+                    <Form.Item label=" ">
+                        <Button type="primary" htmlType="submit">
+                            Submit
+                        </Button>
+                    </Form.Item>
+                </Form>
+            </Drawer>
         </React.Fragment>
     )
 }

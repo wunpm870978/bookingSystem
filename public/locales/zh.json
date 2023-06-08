@@ -5,12 +5,45 @@
     "login": {
         "login": "登入",
         "save_username": "記住賬號",
-        "keep_login": "保持登入狀態"
+        "keep_login": "保持登入狀態",
+        "login_fail": "登入失敗"
     },
     "general": {
         "confirm": "確定",
         "cancel": "取消",
-        "loading": "加載中..."
+        "loading": "加載中...",
+        "create": "創建"
+    },
+    "hkarea": {
+        "HK": "港島",
+        "CnW": "中西區",
+        "WC": "灣仔",
+        "E": "東區",
+        "S": "南區",
+        "KLN": "九龍",
+        "YTM": "油尖旺",
+        "SSP": "深水埗",
+        "KLN_CITY": "九龍城",
+        "WTS": "黃大仙",
+        "KT": "觀塘",
+        "NT": "新界",
+        "NT_KT": "葵青",
+        "TW": "荃灣",
+        "TM": "屯門",
+        "YL": "元朗",
+        "N": "北區",
+        "TP": "大埔",
+        "ST": "沙田",
+        "SK": "西貢",
+        "I": "離島"
+    },
+    "shop": {
+        "area": "區域",
+        "district": "地區",
+        "address": "地址",
+        "Street": "街道",
+        "business_hours": "營業時間",
+        "start_time": "開始時間",
+        "end_time": "結束時間"
     }
-
 }
