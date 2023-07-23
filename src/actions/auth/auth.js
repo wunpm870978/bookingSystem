@@ -17,7 +17,7 @@ export const authLoginInfo = (payload) => {
     API.auth.userLogin(payload)
       .then(res => {
         console.log('mlw res', res.data)
-        dispatch(handleLogin(res.data))
+        dispatch(handleLogin(res))
       })
       .catch(err => {
         console.log('catch err', err)

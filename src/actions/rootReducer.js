@@ -13,7 +13,9 @@ export const rootSlice = createSlice({
       state.isKeepLogin = action.payload;
     },
     handleLogin: (state, action) => {
-      state.user = action.payload
+      
+      console.log('mlw',action.payload)
+      state.user = action.payload.data
     },
     handleLogout: (state) => {
       state.user = {}

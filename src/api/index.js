@@ -4,7 +4,7 @@ import auth from './auth';
 class BaseApi {
   constructor() {
     this.requestOptions = {
-      // withCredentials: true,
+      withCredentials: true,
       baseURL: 'http://127.0.0.1:8030',
       headers: {
         'Access-Control-Allow-Origin': '*'
