@@ -23,7 +23,6 @@ const mapStateToProps = (state) => ({
 });
 
 function App({ user, role }) {
-  console.log('enrtetrte')
   return (
     <BrowserRouter>
       <Routes>

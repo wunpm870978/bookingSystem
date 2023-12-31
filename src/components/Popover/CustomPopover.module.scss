@@ -1,0 +1,44 @@
+.root {
+  z-index: 999;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0px;
+  left: 0px;
+}
+
+.mask {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
+  animation: fadeIn 0.4s forwards;
+  z-index: 1;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  transform-origin: center right;
+  width: max-content;
+  max-width: 70%;
+  background-color: white;
+  min-height: 100px;
+  transform: translate(calc(-100% - 10px), -50%);
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  z-index: 2;
+  border-radius: 10px;
+  padding: 15px 10px;
+  color: #ccc;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 0.5;
+  }
+}

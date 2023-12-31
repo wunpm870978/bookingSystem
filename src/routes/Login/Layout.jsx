@@ -32,29 +32,19 @@ const LoginPage = ({ user, isSaveUsername, isKeepLogin, authLoginInfo }) => {
 
   return (
     <div className={s.root}>
-      <div
-        style={{
-          display: 'flex',
-          position: 'absolute',
-          right: '40px',
-          top: '10px',
-          lineHeight: 1.5,
-          fontSize: '14px',
-          justifyContent: 'center'
-        }}
-      >
+      <div className={s.langWrapper}>
         <div
-          style={{ userSelect: 'none', cursor: 'pointer' }}
+          className={s.opiton}
           onClick={() => i18n.changeLanguage('zh')}
         >
           中文
         </div>
-        <div style={{ margin: '0px 10px' }}>
+        <div className={s.divider}>
           |
         </div>
         <div
           onClick={() => i18n.changeLanguage('en')}
-          style={{ userSelect: 'none', cursor: 'pointer' }}
+          className={s.opiton}
         >
           Eng
         </div>

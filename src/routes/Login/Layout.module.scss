@@ -25,4 +25,23 @@
         align-items: center;
         justify-content: center;
     }
+
+    .langWrapper{
+      display: flex;
+      position: absolute;
+      right: 40px;
+      top: 10px;
+      line-height: 1.5;
+      font-size: 14px;
+      justify-content: center;
+
+      .opiton{
+        user-select: none;
+        cursor: pointer;
+      }
+
+      .divider{
+        margin: 0px 10px;
+      }
+    }
 }
