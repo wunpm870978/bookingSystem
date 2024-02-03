@@ -1,0 +1,15 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  list-style-type: none;
+  margin: 0px;
+  padding: 0px 10px;
+  width: 100%;
+  max-width: 350px;
+
+  >* {
+    list-style-type: none;
+  }
+
+}

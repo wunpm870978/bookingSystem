@@ -1,8 +1,31 @@
-body{
-  --theme-bg-color1: #cebda3;
-  --theme-bg-color2: #b06029;
-  --theme-txt-color1: #303139;
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  --theme-primary-bg-color1: #eff6ff;
+  --theme-bg-color2: #40c5f1;
+  --theme-bg-color3: #cfe4fa;
+  --theme-primary-color: #040405;
+  --theme-txt-color1: #546a78;
   --theme-txt-color2: #25252b;
   --theme-txt-color3: #fafafa;
   --theme-txt-color4: #ccc;
+
+  font-family: 'Montserrat', sans-serif;
+}
+
+h3 {
+  font-size: 25px;
+  line-height: 1;
+  font-family: 'Barlow Condensed', sans-serif;
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
 }

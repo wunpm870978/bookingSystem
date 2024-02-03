@@ -1,0 +1,15 @@
+.item {
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+  gap: 15px;
+  padding: 15px 20px;
+  border-radius: 4px;
+  color: var(--theme-primary-color1);
+  cursor: pointer;
+}
+
+.selected,
+.item:hover {
+  background-color: var(--theme-bg-color3);
+}

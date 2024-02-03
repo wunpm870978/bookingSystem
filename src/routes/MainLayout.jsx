@@ -1,31 +1,31 @@
 import React, { useEffect, useRef, useState } from "react";
 import { connect } from "react-redux";
-import DesktopDrawer from "components/Drawer/Drawer";
+import CustomDrawer from "components/CustomDrawer/CustomDrawer";
 import s from './MainLayout.module.scss'
 import TopbarLayout from "components/Topbar/Topbar";
 
 const mapStateToProps = (state) => ({
-    user: state.user,
+  user: state.user,
 });
 
 const MainLayout = ({ children }) => {
-    const drawerRef = useRef(null);
+  const drawerRef = useRef(null);
 
-    useEffect(() => {
+  useEffect(() => {
 
-    }, [drawerRef.current])
+  }, [drawerRef.current])
 
-    return (
-        <div className={s.root}>
-            <DesktopDrawer drawerRef={drawerRef} />
-            <div className={s.contentWrapper}>
-                <TopbarLayout />
-                <div className={s.innerContent}>
-                {children}
-                </div>
-            </div>
+  return (
+    <div className={s.root}>
+      <CustomDrawer />
+      <div className={s.contentWrapper}>
+        <TopbarLayout />
+        <div className={s.innerContent}>
+          {children}
         </div>
-    )
+      </div>
+    </div>
+  )
 }
 
 export default connect(mapStateToProps)(MainLayout);

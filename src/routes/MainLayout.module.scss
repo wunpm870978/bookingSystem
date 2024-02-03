@@ -1,38 +1,40 @@
 .root {
-    display: flex;
-    width: 100vw;
-    height: 100dvh;
+  display: flex;
+  width: 100vw;
+  height: 100dvh;
 
-    .innerContent {
-        width: 100%;
-        padding: 20px 30px;
-        box-sizing: border-box;
-    }
+  >* {
+    flex-shrink: 0;
+  }
 
-    .contentWrapper {
-        width: 100%;
-        height: 100%;
-        overflow: overlay;
-        box-sizing: border-box;
-    }
+  .innerContent {
+    width: 100%;
+    padding: 20px 30px;
+  }
 
-    .contentWrapper::-webkit-scrollbar {
-        width: 8px;
-        // height: 12px;
-    }
+  .contentWrapper {
+    flex: 1 0 auto;
+    height: 100%;
+    overflow: overlay;
+  }
 
-    .contentWrapper::-webkit-scrollbar-track {
-        background: white;
-    }
+  .contentWrapper::-webkit-scrollbar {
+    width: 8px;
+    // height: 12px;
+  }
 
-    .contentWrapper::-webkit-scrollbar-thumb {
-        background: #ddd;
-        visibility: hidden;
-        border-radius: 100px;
-        background-image: linear-gradient(180deg, #d0368a 0%, #708ad4 99%);
-    }
+  .contentWrapper::-webkit-scrollbar-track {
+    background: white;
+  }
 
-    .contentWrapper:hover::-webkit-scrollbar-thumb {
-        visibility: visible;
-    }
+  .contentWrapper::-webkit-scrollbar-thumb {
+    background: #ddd;
+    visibility: hidden;
+    border-radius: 100px;
+    background-image: linear-gradient(180deg, #d0368a 0%, #708ad4 99%);
+  }
+
+  .contentWrapper:hover::-webkit-scrollbar-thumb {
+    visibility: visible;
+  }
 }
