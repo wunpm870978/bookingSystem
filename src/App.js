@@ -1,14 +1,11 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
 import { connect } from "react-redux";
-import { LoadingOutlined } from '@ant-design/icons';
-import { Spin } from 'antd';
-import { isEmpty } from "lodash";
 import LoginAuthentication from 'actions/auth/login';
 import { getLoadableComponent } from 'utilities/utilities';
+import MainLayout from 'routes/MainLayout';
 
 const LoginPage = getLoadableComponent(() => import('routes/Login/Layout'));
-const MainLayout = getLoadableComponent(() => import('routes/MainLayout'));
 const Test = getLoadableComponent(() => import('routes/Test'));
 const Test2 = getLoadableComponent(() => import('routes/Test2'));
 const ScheduleLayout = getLoadableComponent(() => import('routes/Schedule/ScheduleLayout'));
@@ -28,32 +25,26 @@ function App({ user, role }) {
       <Routes>
         <Route path="login" element={<LoginPage />} />
         <Route
-          index
-          path='/*'
+          path='/'
           element={
             <LoginAuthentication>
-              <Route path='test' >
-                <Route path='test2' element={<Test2 />} />
-                <Route index path='*' element={<Test />} />
-              </Route>
-              <Route path='shop' element={<MainLayout><ShopTable /></MainLayout>} />
-
-              {/* <Route path='course' element={
-                  <MainLayout>
-                    {role === 'shop'
-                      ? <CourseTable />
-                      : <CourseEnrollment />
-                    }
-                  </MainLayout>
-                } /> */}
-              <Route path='course' element={<MainLayout><CourseTable /></MainLayout>} />
-              <Route path='course2' element={<MainLayout><CourseEnrollment /></MainLayout>} />
-              <Route path='schedule' element={<MainLayout><ScheduleLayout /></MainLayout>} />
-              <Route index path='*' element={<MainLayout><Test2 /></MainLayout>} />
+              <MainLayout>
+                <Outlet />
+              </MainLayout>
             </LoginAuthentication>
           }
         >
+          <Route path='test' >
+            <Route path='test2' element={<Test2 />} />
+            <Route index path='*' element={<Test />} />
+          </Route>
+          <Route path='shop' element={<ShopTable />} />
+          <Route path='course' element={<CourseTable />} />
+          <Route path='course2' element={<CourseEnrollment />} />
+          <Route path='schedule' element={<ScheduleLayout />} />
+          <Route index path='*' element={<Test2 />} />
         </Route>
+        <Route index path='*' element={<Test2 />} />
       </Routes>
     </BrowserRouter>
 

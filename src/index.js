@@ -5,6 +5,7 @@ import i18n from './i18n';
 import { I18nextProvider } from 'react-i18next';
 import { store } from './actions/configureRedux'
 import { Provider } from 'react-redux'
+import './index.module.scss';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
