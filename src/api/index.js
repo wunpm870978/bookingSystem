@@ -1,13 +1,14 @@
 import axios from 'axios';
 import auth from './auth';
-
+import { VERISON } from './constant';
 class BaseApi {
   constructor() {
     this.requestOptions = {
       withCredentials: true,
       baseURL: 'http://127.0.0.1:8030',
       headers: {
-        'Access-Control-Allow-Origin': '*'
+        'Access-Control-Allow-Origin': '*',
+        'x-version': VERISON,
       },
       params: {},
       timout: 60000,

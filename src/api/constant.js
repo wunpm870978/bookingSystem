@@ -1,0 +1,1 @@
+export const VERISON = '0.0.1';

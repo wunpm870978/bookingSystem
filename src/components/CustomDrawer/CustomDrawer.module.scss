@@ -1,13 +1,16 @@
 .root {
   display: flex;
+  flex: 0 0 300px;
   position: relative;
   flex-direction: column;
   width: 300px;
   height: 100%;
-  overflow: overlay;
+  overflow-x: hidden;
+  overflow-y: overlay;
   background-color: var(--theme-primary-bg-color1);
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   z-index: 99;
+  transition: all 0.4s ease-in-out;
 
   .avatarWrapper {
     display: flex;
@@ -16,8 +19,15 @@
     justify-content: flex-start;
     gap: 15px;
     user-select: none;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 
-    .img{
+    >* {
+      flex-shrink: 0;
+    }
+
+    .img {
       width: 50px;
       height: 50px;
       padding: 5px;
@@ -26,7 +36,7 @@
       background-color: white;
       box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
 
-      >img{
+      >img {
         width: 100%;
         aspect-ratio: 1;
         object-fit: cover;
@@ -52,4 +62,11 @@
 
 .root:hover::-webkit-scrollbar-thumb {
   visibility: visible;
+}
+
+
+@media only screen and (max-width:1000px) {
+  .root {
+    flex: 0 0 0;
+  }
 }
