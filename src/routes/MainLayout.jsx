@@ -9,17 +9,18 @@ const mapStateToProps = (state) => ({
 });
 
 const MainLayout = ({ children }) => {
-  const drawerRef = useRef(null);
-
-  useEffect(() => {
-
-  }, [drawerRef.current])
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   return (
     <div className={s.root}>
-      <CustomDrawer />
+      <CustomDrawer
+        isOpen={isDrawerOpen}
+        onClose={() => setIsDrawerOpen(false)}
+      />
       <div className={s.contentWrapper}>
-        <TopbarLayout />
+        <TopbarLayout
+          drawerOnClick={() => setIsDrawerOpen(prev => !prev)}
+        />
         <div className={s.innerContent}>
           {children}
         </div>

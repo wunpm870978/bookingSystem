@@ -1,11 +1,33 @@
 .root {
-    display: flex;
-    position: sticky;
-    top: 0;
-    right: 0;
-    width: 100%;
-    height: 50px;
-    z-index: 1;
-    background-color: beige;
-    box-shadow: 0 1.6px 3.6px 0 rgba(0, 0, 0, .132), 0 0.3px 0.9px 0 rgba(0, 0, 0, .108);
+  display: flex;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 50px;
+  padding: 0px 20px;
+  z-index: 1;
+  background-color: beige;
+  box-shadow: 0 1.6px 3.6px 0 rgba(0, 0, 0, .132), 0 0.3px 0.9px 0 rgba(0, 0, 0, .108);
+
+  .menu {
+    flex: 0 0 0;
+    height: 30px;
+    mask-image: url('../../../public/assets/images/menu.svg');
+    mask-size: 30px 30px;
+    mask-position: center;
+    mask-repeat: no-repeat;
+    background-color: var(--theme-primary-color);
+    transition: all 0.4s ease-in-out;
+    cursor: pointer;
+  }
+}
+
+@media only screen and (max-width:1000px) {
+  .root {
+    .menu {
+      flex: 0 0 30px;
+    }
+  }
 }

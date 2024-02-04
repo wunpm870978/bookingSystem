@@ -16,6 +16,8 @@ import { useNavigate } from "react-router-dom";
 import { connect, useDispatch } from "react-redux";
 import { handleLogout } from 'actions/rootReducer';
 import CustomMenu from 'components/CustomMenu/CustomMenu';
+import cx from 'classnames';
+import Overlay from 'components/Overlay/Overlay';
 
 const mapStateToProps = (state) => ({
   role: state.user.role,
@@ -30,7 +32,10 @@ const MenuItem = (title, route, icon) => (
   </CustomMenu.Item>
 )
 
-const CustomDrawer = () => {
+const CustomDrawer = ({
+  isOpen = false,
+  onClose = () => { },
+}) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [selectedValue, setSelectedValue] = useState('/');
@@ -45,7 +50,12 @@ const CustomDrawer = () => {
 
   return (
     <React.Fragment>
-      <div className={s.root}>
+      <Overlay isOpen={isOpen} onClose={onClose} />
+      <div className={cx(s.root, s.drawer,
+        isOpen
+          ? s.drawerEnabled
+          : s.drawerDisabled
+      )}>
         <div className={s.avatarWrapper}>
           <div className={s.img}>
             <img src='/assets/images/whale.png' alt='' />

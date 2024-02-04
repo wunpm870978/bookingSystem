@@ -1,13 +1,13 @@
-import React, { useState, useEffect, useCallback, isValidElement, useMemo } from 'react';
+import React, { useState, useEffect, useCallback, isValidElement } from 'react';
 import s from './CustomModal.scss';
 import cx from 'classnames';
 import ReactDom from 'react-dom';
-import cuid from 'cuid';
+import Overlay from 'components/Overlay/Overlay';
 
 const CustomModal = ({
   isOpen = false,
   onClose = (value) => { },
-  modalId = useMemo(() => cuid(), []),
+  id = useId(),
   parentRef = null,
   /**
    * slide animation
@@ -52,9 +52,9 @@ const CustomModal = ({
     if (isOpen) {
       document.documentElement.style.overflow = "hidden";
       setVisible(isOpen);
-    } else {
+    } else if (visible) {
       setTimeout(() => {
-        if (!isOpen && document.getElementById(modalId)) {
+        if (!isOpen && document.getElementById(`${id}_modal`)) {
           setVisible(isOpen);
         }
         document.documentElement.style.overflow = "auto";
@@ -74,9 +74,9 @@ const CustomModal = ({
       setVisible(false);
       document.body.style.overflow = "auto";
       document.documentElement.style.overflow = "auto";
-      if (document.getElementById(modalId)) {
-        if (document.getElementById(modalId).parentNode) {
-          document.getElementById(modalId).parentNode.removeChild(document.getElementById(modalId));
+      if (document.getElementById(`${id}_modal`)) {
+        if (document.getElementById(`${id}_modal`).parentNode) {
+          document.getElementById(`${id}_modal`).parentNode.removeChild(document.getElementById(`${id}_modal`));
         }
       }
     }
@@ -84,8 +84,8 @@ const CustomModal = ({
 
   if (!visible) return false;
   return ReactDom.createPortal(
-    <div className={cx(s.root, parentRef && s.rootWithParent)} id={modalId}>
-      <div className={cx(s.mask, isOpen ? s.maskIn : s.maskOut)} onClick={handleClose} />
+    <div className={cx(s.root, parentRef && s.rootWithParent)} id={`${id}_modal`}>
+      <Overlay isOpen={isOpen} onClose={handleClose} />
       <div className={cx(s.content, getSlidingAnimation())} style={style}>
         {closeEnabled &&
           <div className={s.closeContainer}>

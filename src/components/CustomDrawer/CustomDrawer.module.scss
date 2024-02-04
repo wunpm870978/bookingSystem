@@ -45,6 +45,17 @@
   }
 }
 
+.overlay {
+  display: none;
+  position: fixed;
+  z-index: 98;
+  top: 0px;
+  left: 0px;
+  width: 100vw;
+  height: 100dvh;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
 .root::-webkit-scrollbar {
   width: 5px;
 }
@@ -64,9 +75,43 @@
   visibility: visible;
 }
 
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+  }
+
+  to {
+    transform: translateX(0%);
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateX(0%);
+  }
+
+  to {
+    transform: translateX(-100%);
+  }
+}
+
 
 @media only screen and (max-width:1000px) {
   .root {
     flex: 0 0 0;
+  }
+
+  .drawer {
+    position: fixed;
+    left: 0px;
+    top: 0px;
+  }
+
+  .drawerEnabled {
+    animation: slideIn 0.4s forwards ease-in-out;
+  }
+
+  .drawerDisabled {
+    animation: slideOut 0.4s forwards ease-in-out;
   }
 }
