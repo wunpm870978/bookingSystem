@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import s from './CustomDrawer.module.scss';
 import {
   MailOutlined,
@@ -36,6 +36,7 @@ const CustomDrawer = ({
   isOpen = false,
   onClose = () => { },
 }) => {
+  const [visible, setVisible] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [selectedValue, setSelectedValue] = useState('/');
@@ -48,13 +49,24 @@ const CustomDrawer = ({
     navigate(value);
   }, [])
 
+  useEffect(() => {
+    if (isOpen && !visible) {
+      setVisible(true)
+    } else if (!isOpen && visible) {
+      setTimeout(() => {
+        setVisible(false);
+      }, 400)
+    }
+  }, [isOpen])
+
   return (
     <React.Fragment>
       <Overlay isOpen={isOpen} onClose={onClose} />
       <div className={cx(s.root, s.drawer,
-        isOpen
-          ? s.drawerEnabled
-          : s.drawerDisabled
+        {
+          [s.drawerEnabled]: isOpen,
+          [s.drawerDisabled]: !isOpen && visible,
+        }
       )}>
         <div className={s.avatarWrapper}>
           <div className={s.img}>

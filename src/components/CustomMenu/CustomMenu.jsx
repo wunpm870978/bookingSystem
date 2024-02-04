@@ -9,12 +9,12 @@ const CustomMenu = ({
 }) => {
   const id = useId();
   return (
-    <ul className={s.root}>
-      {children.map((child, index) => {
+    <ul key={`${id}_menu`} className={s.root}>
+      {children.map((child) => {
         const displayName = child.type.displayName;
         if (displayName === "MenuItem") {
           return cloneElement(child, {
-            id,
+            key: `${id}_menu_option_${child.props.value}`,
             selectedValue,
             itemOnClick,
           });

@@ -32,7 +32,6 @@ const Overlay = ({
      * 3) detroy element release resources
      */
     return () => {
-      console.log('mlw enter')
       onClose(false);
       setVisible(false);
       document.body.style.overflow = "auto";
@@ -51,9 +50,10 @@ const Overlay = ({
       id={`${id}_overlay`}
       key={id}
       className={cx(s.overlay,
-        isOpen
-          ? s.overlayEnabled
-          : s.overlayDisabled
+        {
+          [s.overlayEnabled]: isOpen,
+          [s.overlayDisabled]: !isOpen,
+        }
       )}
       onClick={onClose}
     />,

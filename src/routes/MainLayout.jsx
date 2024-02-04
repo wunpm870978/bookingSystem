@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import CustomDrawer from "components/CustomDrawer/CustomDrawer";
 import s from './MainLayout.module.scss'

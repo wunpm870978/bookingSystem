@@ -25,20 +25,23 @@ const CustomModal = ({
 }) => {
   const [visible, setVisible] = useState(false);
 
-  const getSlidingAnimation = useCallback(() => {
+  const getAnimation = useCallback(() => {
+    const animation = (enter, quit) => {
+      return {
+        [enter]: isOpen,
+        [quit]: !isOpen
+      }
+    }
+
     switch (slideAnimation) {
       case 'up':
-        if (isOpen) return s.contentAnimationSlideUpIn
-        return s.contentAnimationSlideUpOut
+        return animation(s.contentSlideUpIn, s.contentSlideUpOut);
       case 'down':
-        if (isOpen) return s.contentAnimationSlideDownIn
-        return s.contentAnimationSlideDownOut
+        return animation(s.contentSlideDownIn, s.contentSlideDownOut);
       case 'left':
-        if (isOpen) return s.contentAnimationSlideLeftIn
-        return s.contentAnimationSlideLeftOut
+        return animation(s.contentSlideLeftIn, s.contentSlideLeftOut);
       case 'right':
-        if (isOpen) return s.contentAnimationSlideRightIn
-        return s.contentAnimationSlideRightOut
+        return animation(s.contentSlideRightIn, s.contentSlideRightOut);
       default:
         return;
     }
@@ -86,7 +89,7 @@ const CustomModal = ({
   return ReactDom.createPortal(
     <div className={cx(s.root, parentRef && s.rootWithParent)} id={`${id}_modal`}>
       <Overlay isOpen={isOpen} onClose={handleClose} />
-      <div className={cx(s.content, getSlidingAnimation())} style={style}>
+      <div className={cx(s.content, getAnimation())} style={style}>
         {closeEnabled &&
           <div className={s.closeContainer}>
             <div className={s.close} onClick={handleClose} />
