@@ -3,7 +3,6 @@ import s from './MenuItem.module.scss';
 import cx from 'classnames';
 
 const MenuItem = ({
-  key,
   selectedValue,
   value,
   icon: Icon,
@@ -14,7 +13,7 @@ const MenuItem = ({
 
   return (
     <li
-      key={key || `${id}_menu_option_${value}`}
+      key={`${id}_menu_option_${value}`}
       className={cx(s.item, selectedValue === value && s.selected)}
       onClick={() => itemOnClick(value)}
     >

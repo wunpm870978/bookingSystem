@@ -14,7 +14,7 @@ import {
 } from '@ant-design/icons';
 import { useNavigate } from "react-router-dom";
 import { connect, useDispatch } from "react-redux";
-import { handleLogout } from 'actions/rootReducer';
+import { handleLogout } from 'actions/reducers/global';
 import CustomMenu from 'components/CustomMenu/CustomMenu';
 import cx from 'classnames';
 import Overlay from 'components/Overlay/Overlay';
@@ -73,6 +73,7 @@ const CustomDrawer = ({
             <img src='/assets/images/whale.png' alt='' />
           </div>
           Test account
+          <div className={s.close} onClick={onClose} />
         </div>
         <CustomMenu
           selectedValue={selectedValue}

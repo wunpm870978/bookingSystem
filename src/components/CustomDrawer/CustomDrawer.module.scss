@@ -14,6 +14,7 @@
 
   .avatarWrapper {
     display: flex;
+    position: relative;
     padding: 20px 20px;
     align-items: center;
     justify-content: flex-start;
@@ -64,6 +65,37 @@
   visibility: visible;
 }
 
+.close {
+  display: none;
+  position: absolute !important;
+  right: 10px;
+  top: 50%;
+  width: 30px;
+  height: 30px;
+  opacity: 0.3;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.close:before,
+.close:after {
+  position: absolute;
+  left: 14px;
+  top: 6px;
+  content: ' ';
+  height: 19px;
+  width: 2px;
+  background-color: #333;
+}
+
+.close:before {
+  transform: rotate(45deg);
+}
+
+.close:after {
+  transform: rotate(-45deg);
+}
+
 @keyframes slideIn {
   from {
     transform: translateX(-100%);
@@ -90,6 +122,10 @@
     flex: 0 0 0;
   }
 
+  .close {
+    display: block;
+  }
+
   .drawer {
     position: fixed;
     left: 0px;
@@ -103,5 +139,12 @@
 
   .drawerDisabled {
     animation: slideOut 0.4s forwards ease-in-out;
+  }
+}
+
+@media only screen and (max-width:480px) {
+  .drawer {
+    width: 100%;
+    max-width: 100%;
   }
 }

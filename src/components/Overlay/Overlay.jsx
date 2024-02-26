@@ -24,25 +24,6 @@ const Overlay = ({
     }
   }, [isOpen])
 
-  useEffect(() => {
-    /** 
-     * cleanup functions 
-     * 1) reset variables
-     * 2) allow scroll for body
-     * 3) detroy element release resources
-     */
-    return () => {
-      onClose(false);
-      setVisible(false);
-      document.body.style.overflow = "auto";
-      document.documentElement.style.overflow = "auto";
-      if (document.getElementById(`${id}_overlay`)) {
-        if (document.getElementById(`${id}_overlay`).parentNode) {
-          document.getElementById(`${id}_overlay`).parentNode.removeChild(document.getElementById(`${id}_overlay`));
-        }
-      }
-    }
-  }, [])
 
   if (!visible) return false;
   return ReactDom.createPortal(

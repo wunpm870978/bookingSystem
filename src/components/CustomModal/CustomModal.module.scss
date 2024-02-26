@@ -1,8 +1,8 @@
 .root {
-  z-index: 999;
+  z-index: 1000;
   position: fixed;
   width: 100vw;
-  height: 100vh;
+  height: 100dvh;
   top: 0px;
   left: 0px;
 }
@@ -21,13 +21,16 @@
 
 .close {
   position: absolute !important;
+  opacity: 0.3;
   right: 10px;
   top: 10px;
   width: 30px;
   height: 30px;
-  opacity: 0.3;
-  // transition: all 0.3s ease-in-out;
   cursor: pointer;
+}
+
+.close:hover {
+  opacity: 1;
 }
 
 .close:before,
@@ -49,6 +52,12 @@
   transform: rotate(-45deg);
 }
 
+.headerClose{
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+}
+
 .content {
   display: flex;
   flex-direction: column;
@@ -65,77 +74,79 @@
     position: relative;
   }
 
-  .header {
-    display: flex;
-    width: 100%;
-    align-items: center;
-    padding: 15px 10px;
-    color: black;
-    flex: 0 0 auto;
-    position: sticky;
-    top: 0px;
-    left: 0px;
-    z-index: 1;
-    background-color: white;
-    border-bottom: 1px solid #eee;
-  }
+}
 
-  .child {
-    display: flex;
-    flex-direction: column;
-    flex: 1 0 auto;
-    overflow: hidden;
-    height: calc(100% - 999px);
+.header {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  padding: 15px 10px;
+  color: black;
+  flex: 0 0 auto;
+  position: sticky;
+  top: 0px;
+  left: 0px;
+  z-index: 1;
+  background-color: white;
+  border-bottom: 1px solid #eee;
+}
 
-    >* {
-      flex-shrink: 0;
-    }
-  }
+.child {
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 auto;
+  overflow: hidden;
+  height: calc(100% - 999px);
 
-  .footer {
-    display: flex;
-    // box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-    width: 100%;
-    flex: 0 0 auto;
+  >* {
+    flex-shrink: 0;
   }
 }
 
-.contentSlideUpIn {
+.footer {
+  display: flex;
+  width: 100%;
+  flex: 0 0 auto;
+}
+
+.contentAnimationSlideUpIn {
   left: 0px;
   animation: slideUpIn 0.4s forwards;
 }
 
-.contentSlideDownIn {
-  left: 0px;
+.contentAnimationSlideDownIn {
+  left: 50%;
+  transform: translate(-50%, -50%);
   animation: slideDownIn 0.4s forwards;
 }
 
-.contentSlideLeftIn {
+.contentAnimationSlideLeftIn {
   top: 0px;
   animation: slideLeftIn 0.4s forwards;
 }
 
-.contentSlideRightIn {
+.contentAnimationSlideRightIn {
   top: 0px;
   animation: slideRightIn 0.4s forwards;
 }
 
-.contentSlideUpOut {
+.contentAnimationSlideUpOut {
   left: 0px;
   animation: slideUpOut 0.4s forwards;
 }
 
-.contentSlideDownOut {
-  left: 0px;
+.contentAnimationSlideDownOut {
+  left: 50%;
+  transform: translate(-50%, -50%);
   animation: slideDownOut 0.4s forwards;
 }
 
-.contentSlideLeftOut {
+.contentAnimationSlideLeftOut {
   top: 0px;
   animation: slideLeftOut 0.4s forwards;
 }
 
-.contentSlideRightOut {
+.contentAnimationSlideRightOut {
   top: 0px;
   animation: slideRightOut 0.4s forwards;
 }
@@ -153,10 +164,13 @@
 @keyframes slideDownIn {
   0% {
     top: -100%;
+    left: 50%;
   }
 
   100% {
-    top: 0%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 }
 
@@ -192,11 +206,15 @@
 
 @keyframes slideDownOut {
   0% {
-    top: 0%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 
   100% {
     top: -100%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 }
 
@@ -220,7 +238,7 @@
   }
 }
 
-@media only screen and (max-width:480px) {
+@media only screen and (max-width:550px) {
   .content {
     width: 100%;
     max-width: 100%;

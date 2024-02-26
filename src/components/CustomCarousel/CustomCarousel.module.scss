@@ -1,0 +1,27 @@
+.root {
+  position: relative;
+  width: 100%;
+  max-width: 700px;
+  aspect-ratio: 3/2;
+  overflow: hidden;
+  margin: 0 auto;
+  transition: transform 0.3s;
+}
+
+.sliderWrapper {
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  transition: left 0.2s ease-out;
+  touch-action: none;
+}
+
+.pagination {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  padding: 5px 15px;
+  background: rgba(0, 0, 0, .5);
+  border-radius: 4px;
+  color: white;
+}

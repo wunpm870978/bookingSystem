@@ -1,0 +1,30 @@
+.root {
+  height: 100%;
+  overflow: hidden;
+  transition: max-height 0.2s ease-in-out;
+
+  .itemContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    user-select: none;
+    gap: 10px;
+    cursor: pointer;
+
+    .content {
+      font-size: 18px;
+      flex: 1 0 0;
+      overflow: hidden;
+    }
+
+    .icon {
+      flex: 0 0 16px;
+      font-size: 16px;
+    }
+  }
+
+  .subLayer{
+    padding-left: 15px;
+  }
+}
