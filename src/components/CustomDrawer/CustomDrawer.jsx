@@ -43,7 +43,7 @@ const CustomDrawer = ({
 
   const menuItemOnClick = useCallback((value) => {
     if (value === '/login') {
-      dispatch(handleLogout())
+      // dispatch(handleLogout())
     }
     setSelectedValue(value);
     navigate(value);

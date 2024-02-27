@@ -5,7 +5,7 @@ import LoginAuthentication from 'actions/auth/login';
 import { getLoadableComponent } from 'utilities/utilities';
 import MainLayout from 'routes/MainLayout';
 
-const LoginPage = getLoadableComponent(() => import('routes/Login/Layout'));
+const LoginPage = getLoadableComponent(() => import('routes/Login/Login'));
 const Test = getLoadableComponent(() => import('routes/Test'));
 const Test2 = getLoadableComponent(() => import('routes/Test2'));
 const ScheduleLayout = getLoadableComponent(() => import('routes/Schedule/ScheduleLayout'));

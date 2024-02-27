@@ -7,7 +7,7 @@ import React, {
   useId,
 } from 'react';
 import s from './SubMenu.module.scss';
-import { Icon } from 'antd';
+import { DownOutlined } from '@ant-design/icons';
 
 const SubMenu = ({
   selectedValue = null,
@@ -41,7 +41,7 @@ const SubMenu = ({
         <div className={s.content}>
           {Content}
         </div>
-        <Icon className={s.icon} type='down' />
+        <DownOutlined className={s.icon} />
       </div>
       <div ref={childrenRef} className={s.subLayer}>
         {React.Children.map(children, (child) => {

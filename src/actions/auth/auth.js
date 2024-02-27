@@ -1,7 +1,7 @@
 import encryption from 'js-sha512';
-import API from 'api/index';
+import API from 'services/API/index';
 import { noti } from 'utilities/utilities'
-import { handleLogin } from 'actions/rootReducer';
+import { handleLogin } from 'actions/reducers/global';
 
 export const authLoginInfo = (payload) => {
   console.log('ppp', payload)
