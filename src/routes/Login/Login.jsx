@@ -56,6 +56,8 @@ const LoginPage = () => {
 
   return (
     <div className={s.root}>
+      <div className={s.overlay} />
+      <div className={s.mask} />
       <div className={s.langWrapper}>
         <div
           className={s.opiton}
@@ -64,9 +66,7 @@ const LoginPage = () => {
         >
           中文
         </div>
-        <div className={s.divider}>
-          |
-        </div>
+        <div className={s.divider} />
         <div
           onClick={handleLangOnChange}
           data-lang="en"
@@ -75,44 +75,45 @@ const LoginPage = () => {
           Eng
         </div>
       </div>
-      <div className={s.inputWrapper}>
-        <div>{t('email')}</div>
-        <Input
-          value={loginData.username}
-          onChange={(e) => handleLoginOnChange('username', e.target.value)}
-          size="large"
-          prefix={<UserOutlined />}
+      <div className={s.descriptionWrapper}>
+        <div className={s.title}>
+          <h3>{t('login.title_1')}</h3>
+          <h3>{t('login.title_2')}</h3>
+        </div>
+        <p>{t('login.description')}</p>
+      </div>
+      <div className={s.formContainer}>
+        <div className={s.logoContainer}>
+          <div className={s.logo} />
+          <p>Booking</p>
+        </div>
+        <div className={s.col}>
+          <p>{t('email')}</p>
+          <Input
+            value={loginData.username}
+            onChange={(e) => handleLoginOnChange('username', e.target.value)}
+            size="large"
+            prefix={<UserOutlined />}
 
-        />
-        <div style={{ marginTop: '10px' }}>{t('password')}</div>
-        <Input.Password
-          value={loginData.password}
-          onChange={(e) => handleLoginOnChange('password', e.target.value)}
-          size="large"
-        />
-        <div style={{ display: 'flex', marginTop: '10px' }}>
-          <Checkbox
-            checked={false}
-            onChange={(e) => {
-              console.log(e.target.checked)
-              // dispatch(handleSaveUsername(e.target.checked))
-            }}
-          >
-            {t('login.save_username')}
-          </Checkbox>
-          <Checkbox
-            checked={false}
-            onChange={(e) => {
-              console.log(e.target.checked)
-              // dispatch(handleSaveUsername(e.target.checked))
-            }}
-          >
-
-            {t('login.keep_login')}
-          </Checkbox>
+          />
+        </div>
+        <div className={s.col}>
+          <p>{t('password')}</p>
+          <Input.Password
+            value={loginData.password}
+            onChange={(e) => handleLoginOnChange('password', e.target.value)}
+            size="large"
+          />
+        </div>
+        <div className={s.forgetpw}>
+          forget password
         </div>
         <Button className={s.loginBtn} onClick={onSubmit}>
           {t('login.login')}
+        </Button>
+        <div className={s.divider} />
+        <Button className={s.loginBtn} onClick={onSubmit}>
+          {t('login.register')}
         </Button>
       </div>
     </div>

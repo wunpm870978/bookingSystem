@@ -1,0 +1,29 @@
+.root {
+  display: flex;
+  align-items: center;
+  padding: 8px 15px;
+  gap: 10px;
+  border: 1px solid #edf1f0;
+  border-radius: 1000px;
+  user-select: none;
+  cursor: pointer;
+  transition: all 0.4s ease-in-out;
+
+  >p {
+    font-size: 14px;
+  }
+
+  .down {
+    width: 10px;
+    height: 10px;
+    mask-image: url('../../../../../public/assets/svg/arrowdown.svg');
+    mask-size: contain;
+    mask-position: center;
+    mask-repeat: no-repeat;
+    background-color: #889397;
+  }
+}
+
+.root:hover {
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
+}

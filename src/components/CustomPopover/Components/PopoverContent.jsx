@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState, useMemo, useRef,useId } from 'react';
+import React, { useCallback, useEffect, useState, useRef, useId } from 'react';
 import ReactDom from 'react-dom';
 import Overlay from 'components/Overlay/Overlay';
 import cx from 'classnames';
@@ -20,8 +20,8 @@ const PopoverContent = ({
 
   const onNotFocus = useCallback((e) => {
     if (
-      !contentRef.current.contains(e.target) ||
-      targetRef.contains(e.target)
+      targetRef.contains(e.target) ||
+      !contentRef.current.contains(e.target)
     ) {
       onClose();
     }
@@ -62,6 +62,12 @@ const PopoverContent = ({
             top: `${get(rect, 'top', 0) - 10}px`,
             transform: 'translate(-100%, -100%)',
           }
+        case 'bottomleft':
+          return {
+            left: `${get(rect, 'right', 0)}px`,
+            top: `${get(rect, 'top', 0) + get(rect, 'height', 0) + 10}px`,
+            transform: 'translateX(-100%)',
+          }
         default:
           return {};
       }
@@ -72,17 +78,17 @@ const PopoverContent = ({
   useEffect(() => {
     if (isOpen) {
       setVisible(isOpen);
-      window.addEventListener("click", onNotFocus);
-    } else {
+      document.addEventListener("mousedown", onNotFocus);
+    } else if (!isOpen && visible) {
       timeoutRef.current = setTimeout(() => {
         if (!isOpen && document.getElementById(`${id}_po`)) {
           setVisible(isOpen);
-          window.removeEventListener("click", onNotFocus);
+          document.removeEventListener("mousedown", onNotFocus);
         }
       }, 300)
     }
     return () => {
-      window.removeEventListener("click", onNotFocus);
+      window.removeEventListener("mousedown", onNotFocus);
       timeoutRef.current && clearTimeout(timeoutRef.current);
     };
   }, [isOpen])

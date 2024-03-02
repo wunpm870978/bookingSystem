@@ -21,10 +21,10 @@ i18n
   // for all options read: https://www.i18next.com/overview/configuration-options
   .init({
     supportedLngs: ['en', 'zh'],
-    lng: 'zh',
-    fallbackLng: "zh",
+    lng: 'en',
+    fallbackLng: "en",
     debug: false,
-    load: 'zh',
+    load: 'en',
     interpolation: {
       escapeValue: false, // not needed for react as it escapes by default
     },

@@ -1,6 +1,5 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
-import { connect } from "react-redux";
 import LoginAuthentication from 'actions/auth/login';
 import { getLoadableComponent } from 'utilities/utilities';
 import MainLayout from 'routes/MainLayout';
@@ -13,13 +12,7 @@ const CourseEnrollment = getLoadableComponent(() => import('routes/Course/Custom
 const CourseTable = getLoadableComponent(() => import('routes/Course/Shop/CourseTable'));
 const ShopTable = getLoadableComponent(() => import('routes/Shop/ShopTable'));
 
-
-const mapStateToProps = (state) => ({
-  user: state.user,
-  role: state.user.email,
-});
-
-function App({ user, role }) {
+function App() {
   return (
     <BrowserRouter>
       <Routes>
@@ -47,8 +40,7 @@ function App({ user, role }) {
         <Route index path='*' element={<Test2 />} />
       </Routes>
     </BrowserRouter>
-
   );
 }
 
-export default connect(mapStateToProps)(App);
+export default App;

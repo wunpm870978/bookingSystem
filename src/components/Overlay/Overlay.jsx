@@ -11,17 +11,7 @@ const Overlay = ({
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    if (isOpen) {
-      document.documentElement.style.overflow = "hidden";
-      setVisible(isOpen);
-    } else if (visible) {
-      setTimeout(() => {
-        if (!isOpen && document.getElementById(`${id}_overlay`)) {
-          setVisible(isOpen);
-        }
-        document.documentElement.style.overflow = "auto";
-      }, 300)
-    }
+    setVisible(isOpen);
   }, [isOpen])
 
 

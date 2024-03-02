@@ -1,0 +1,62 @@
+.root {
+  z-index: 1000;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0px;
+  left: 0px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  transform-origin: center right;
+  width: max-content;
+  max-width: 70%;
+  background-color: white;
+  min-height: 100px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  z-index: 2;
+  border-radius: 10px;
+  padding: 10px 8px;
+  color: #ccc;
+}
+
+.rootRelative {
+  height: auto !important;
+  width: auto !important;
+}
+
+.relative {
+  position: relative !important;
+  max-width: 100% !important;
+}
+
+.entry {
+  animation: fadeIn 0.2s forwards ease-in-out;
+}
+
+.leave {
+  animation: fadeOut 0.2s forwards ease-in-out;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}

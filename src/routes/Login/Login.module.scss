@@ -1,47 +1,186 @@
+$formWidth: 350px;
+
 .root {
+  display: flex;
+  width: 100vw;
+  height: 100dvh;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  font-size: calc(1.2vw + 10px);
+
+  .overlay {
     display: flex;
-    width: 100vw;
-    height: 100vh;
-    position: relative;
-    justify-content: center;
-    align-items: center;
+    flex: 1 0 0;
+    height: 100%;
+    background-image: url('../../../public/assets/images/wave.jpg');
+    background-position: -5rem -10rem;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .mask {
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    width: 100%;
+    height: 100%;
+    mask-image: url('../../../public/assets/svg/wave.svg');
+    mask-size: cover;
+    mask-repeat: no-repeat;
+    mask-position: right;
+    background-color: #1E4296
+  }
+
+  .descriptionWrapper {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 7%;
+    right: calc(#{$formWidth} + 7rem);
+    gap: 2rem;
+    width: 100%;
+    max-width: 400px;
+    font-size: inherit;
+    text-align: right;
+
+    >div {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      >h3 {
+        font-size: 3rem;
+        font-weight: 500;
+        color: #0c2657;
+        padding: 0;
+        margin: 0;
+      }
+    }
+
+    >p {
+      font-size: 1rem;
+      line-height: 1.5;
+      font-weight: 300;
+      color: #0c2657;
+    }
+
+  }
+
+  .formContainer {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    flex-shrink: 0;
+    width: 100%;
+    max-width: $formWidth;
+    padding: 30px 20px;
+    height: 100%;
+    color: white;
+    font-size: inherit;
+
+    .logoContainer {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 30px 0px;
+
+      .logo {
+        width: 50px;
+        height: 50px;
+        background-color: white;
+        mask-image: url('../../../public/assets/svg/whale.svg');
+        mask-size: contain;
+        mask-repeat: no-repeat;
+        mask-position: center;
+      }
+    }
+
+    .col {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      position: relative;
+      margin-bottom: 15px;
+      gap: 5px;
+
+      >p {
+        font-size: 16px;
+      }
+    }
 
     .inputWrapper {
-        display: flex;
-        flex-direction: column;
-        position: relative;
-        width: 100%;
-        max-width: 350px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      width: 100%;
+      max-width: 350px;
+      // gap: 10px;
 
+      >* {
+        flex-shrink: 0;
+      }
+
+      >p {
+        font-size: 16px;
+      }
+    }
+
+    .divider {
+      height: 1px;
+      width: 100%;
+      background-color: #eee;
+      margin: 25px auto;
+    }
+
+    .forgetpw {
+      font-size: 12px;
+      margin: 20px 0px 10px 0px;
     }
 
     .loginBtn {
-        display: inline-flex;
-        margin-top: 10px;
-        height: 40px;
-        border-radius: 6px;
-        -webkit-box-sizing: border-box;
-        box-sizing: border-box;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .langWrapper{
-      display: flex;
-      position: absolute;
-      right: 40px;
-      top: 10px;
-      line-height: 1.5;
-      font-size: 14px;
+      display: inline-flex;
+      height: 40px;
+      border-radius: 6px;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+      align-items: center;
       justify-content: center;
-
-      .opiton{
-        user-select: none;
-        cursor: pointer;
-      }
-
-      .divider{
-        margin: 0px 10px;
-      }
     }
+  }
+
+  .langWrapper {
+    display: flex;
+    position: fixed;
+    right: 40px;
+    top: 10px;
+    line-height: 1.5;
+    font-size: 14px;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    color: white;
+
+    .opiton {
+      user-select: none;
+      cursor: pointer;
+    }
+
+    .divider {
+      width: 1px;
+      height: 16px;
+      background-color: #aaa;
+    }
+  }
+}
+
+@media only screen and (min-width:1600px) {
+  .root {
+    .descriptionWrapper {
+      right: calc(#{$formWidth} + 20rem);
+      font-size: calc(1.5vw + 10px);
+    }
+  }
 }

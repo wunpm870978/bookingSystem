@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useRef, memo } from 'react'
 import PopoverContent from './Components/PopoverContent';
 
 const CustomPopover = ({
@@ -13,7 +13,7 @@ const CustomPopover = ({
    * 5) topleft
    */
   position = 'left',
-  maskEnabled = true,
+  maskEnabled = false,
   children,
   content,
 }) => {
@@ -36,4 +36,4 @@ const CustomPopover = ({
   )
 }
 
-export default CustomPopover;
+export default memo(CustomPopover);

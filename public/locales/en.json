@@ -1,19 +1,23 @@
 {
-    "lang": "lang",
-    "email": "Email",
-    "password": "Password",
-    "login": {
-        "login": "Login",
-        "save_username": "Save Email",
-        "keep_login": "Keep Login"
-    },
-    "general": {
-        "confirm": "Confirm",
-        "cancel": "Cancel",
-        "loading": "Loading",
-        "filter": "Filter"
-    },
-    "course": {
-        "search_placetext": "Course ID/ Name/ Tutor"
-    }
+  "lang": "lang",
+  "email": "Email",
+  "password": "Password",
+  "login": {
+    "login": "Login",
+    "register": "Register",
+    "save_username": "Save Email",
+    "keep_login": "Keep Login",
+    "title_1": "Making Schedule",
+    "title_2": "Better for Everyone",
+    "description": "Bookin YL is dedicated to automating and optimizing management system, assits you planning of time. Boost productivity today!"
+  },
+  "general": {
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+    "loading": "Loading",
+    "create": "Create"
+  },
+  "course": {
+    "search_placetext": "Course ID/ Name/ Tutor"
+  }
 }
