@@ -1,7 +1,9 @@
 import React, { useState, memo } from 'react';
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import s from './UserButton.module.scss';
 import CustomPopover from 'components/CustomPopover/CustomPopover';
+import { logout } from 'actions/reducers/user';
+import { LogoutOutlined } from '@ant-design/icons';
 
 const UserButton = () => {
   const {
@@ -9,20 +11,21 @@ const UserButton = () => {
   } = useSelector((state) => ({
     userName: state.user.user.name
   }))
+  const dispatch = useDispatch()
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   return (
     <CustomPopover
       isOpen={isDropdownOpen}
       position='bottomleft'
-      onClose={() => {
-        console.log('mlw close')
-        setIsDropdownOpen(false)
-      }}
+      onClose={() => setIsDropdownOpen(false)}
       content={(
-        <div>
-          <div>Logout</div>
-        </div>
+        <ul className={s.content}>
+          <li onClick={() => dispatch(logout())}>
+            <LogoutOutlined />
+            <p>Logout</p>
+          </li>
+        </ul>
       )}
     >
       <div

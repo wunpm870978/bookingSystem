@@ -1,0 +1,32 @@
+$commonColor: #6f6b80;
+$commonColor2: white;
+$commonBgColor: #f5f5f5;
+$commonBgColor2: #525ef1;
+
+.paginationWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+
+  .paginationContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 45px;
+    height: 45px;
+    background-color: $commonBgColor;
+    border-radius: 50%;
+    color: $commonColor;
+    transition: all 0.5s ease-in-out;
+    cursor: pointer;
+  }
+
+  .selected,
+  .paginationContainer:hover {
+    background-color: $commonBgColor2;
+    color: $commonColor2;
+  }
+
+}

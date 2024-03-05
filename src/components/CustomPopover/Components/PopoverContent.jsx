@@ -34,13 +34,13 @@ const PopoverContent = ({
       switch (position) {
         case 'left':
           return {
-            left: `${get(rect, 'left', 0) - 10}px`,
+            left: `${get(rect, 'left', 0) - 5}px`,
             top: `${get(rect, 'top', 0) + (get(rect, 'height', 0) / 2)}px`,
             transform: `translate(-100%, -50%)`
           }
         case 'right':
           return {
-            left: `${get(rect, 'left', 0) + get(rect, 'width', 0) + 10}px`,
+            left: `${get(rect, 'left', 0) + get(rect, 'width', 0) + 5}px`,
             top: `${get(rect, 'top', 0) + (get(rect, 'height', 0) / 2)}px`,
             transform: `translate(0%, -50%)`
           }
@@ -59,13 +59,13 @@ const PopoverContent = ({
         case 'topleft':
           return {
             left: `${get(rect, 'right', 0)}px`,
-            top: `${get(rect, 'top', 0) - 10}px`,
+            top: `${get(rect, 'top', 0) - 5}px`,
             transform: 'translate(-100%, -100%)',
           }
         case 'bottomleft':
           return {
             left: `${get(rect, 'right', 0)}px`,
-            top: `${get(rect, 'top', 0) + get(rect, 'height', 0) + 10}px`,
+            top: `${get(rect, 'top', 0) + get(rect, 'height', 0) + 5}px`,
             transform: 'translateX(-100%)',
           }
         default:
@@ -88,7 +88,7 @@ const PopoverContent = ({
       }, 300)
     }
     return () => {
-      window.removeEventListener("mousedown", onNotFocus);
+      document.removeEventListener("mousedown", onNotFocus);
       timeoutRef.current && clearTimeout(timeoutRef.current);
     };
   }, [isOpen])

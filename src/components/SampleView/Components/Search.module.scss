@@ -1,0 +1,57 @@
+.toolbar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.inputWrapper {
+  display: flex;
+  flex: 1 0 75%;
+  position: relative;
+  max-width: 350px;
+  border-radius: 4px;
+  height: 40px;
+  min-height: 40px;
+  background-color: #f5f5f5;
+  padding: 0px 25px;
+  height: 60px;
+
+  >input {
+    display: flex;
+    flex: 1 0 auto;
+    position: relative;
+    width: auto;
+    min-width: 0.75em;
+    max-width: 100%;
+    outline: 0;
+    z-index: 1;
+    font-size: 14px;
+    line-height: 1.5;
+    border: 1px solid transparent;
+    background: transparent;
+
+    ::placeholder,
+    ::-ms-input-placeholder {
+      color: #757575;
+    }
+  }
+
+  >button {
+    display: block;
+    white-space: nowrap;
+    position: relative;
+    width: fit-content;
+    font-weight: bold;
+    cursor: pointer;
+    overflow: hidden;
+    border: none;
+    background: transparent;
+    height: fit-content;
+    margin: auto;
+
+    .searchIcon {
+      font-size: 15px;
+    }
+  }
+}

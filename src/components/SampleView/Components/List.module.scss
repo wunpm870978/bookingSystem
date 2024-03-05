@@ -1,0 +1,259 @@
+$commonColor: #6f6b80;
+$commonColor2: white;
+$commonBgColor: #f5f5f5;
+$commonBgColor2: #525ef1;
+
+.listWrapper {
+  display: grid;
+  position: relative;
+  width: 100%;
+  column-gap: 2rem;
+  row-gap: 2rem;
+  grid-template-columns: repeat(1, 1fr);
+  grid-auto-rows: minmax(150px, auto);
+
+  .createWrapper {
+    display: flex;
+    flex: 1 0 auto;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    color: black;
+    border: 1px dashed black;
+    user-select: none;
+    cursor: pointer;
+  }
+
+  .checkboxWrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    >div {
+      flex: 1 0 0;
+    }
+
+    >input[type=checkbox] {
+      --active: #275EFE;
+      --active-inner: #fff;
+      --focus: 2px rgba(39, 94, 254, .3);
+      --border: #BBC1E1;
+      --border-hover: #275EFE;
+      --background: #fff;
+      --disabled: #F6F8FF;
+      --disabled-inner: #E1E6F9;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      flex: 0 0 auto;
+      height: 21px;
+      outline: none;
+      display: inline-block;
+      vertical-align: top;
+      position: relative;
+      margin: 0;
+      cursor: pointer;
+      border: 1px solid var(--bc, var(--border));
+      background: var(--b, var(--background));
+      transition: background 0.3s, border-color 0.3s, box-shadow 0.2s;
+    }
+
+    >input[type=checkbox]:after {
+      content: "";
+      display: block;
+      left: 0;
+      top: 0;
+      position: absolute;
+      transition: transform var(--d-t, 0.3s) var(--d-t-e, ease), opacity var(--d-o, 0.2s);
+    }
+
+    >input[type=checkbox]:checked {
+      --b: var(--active);
+      --bc: var(--active);
+      --d-o: .3s;
+      --d-t: .6s;
+      --d-t-e: cubic-bezier(.2, .85, .32, 1.2);
+    }
+
+    >input[type=checkbox]:disabled {
+      --b: var(--disabled);
+      cursor: not-allowed;
+      opacity: 0.9;
+    }
+
+    >input[type=checkbox]:disabled:checked {
+      --b: var(--disabled-inner);
+      --bc: var(--border);
+    }
+
+    >input[type=checkbox]:disabled+label {
+      cursor: not-allowed;
+    }
+
+    >input[type=checkbox]:hover:not(:checked):not(:disabled) {
+      --bc: var(--border-hover);
+    }
+
+    >input[type=checkbox]:focus {
+      box-shadow: 0 0 0 var(--focus);
+    }
+
+    >input[type=checkbox]:not(.switch) {
+      width: 21px;
+    }
+
+    >input[type=checkbox]:not(.switch):after {
+      opacity: var(--o, 0);
+    }
+
+    >input[type=checkbox]:not(.switch):checked {
+      --o: 1;
+    }
+
+    >input[type=checkbox]+label {
+      display: inline-block;
+      vertical-align: middle;
+      cursor: pointer;
+      margin-left: 4px;
+    }
+
+    >input[type=checkbox]:not(.switch) {
+      border-radius: 7px;
+    }
+
+    >input[type=checkbox]:not(.switch):after {
+      width: 5px;
+      height: 9px;
+      border: 2px solid var(--active-inner);
+      border-top: 0;
+      border-left: 0;
+      left: 7px;
+      top: 4px;
+      transform: rotate(var(--r, 20deg));
+    }
+
+    >input[type=checkbox]:not(.switch):checked {
+      --r: 43deg;
+    }
+  }
+
+  .cardWrapper {
+    display: flex;
+    position: relative;
+    flex: 1 0 auto;
+    border-radius: 4px;
+    overflow: hidden;
+
+    .imageContainer {
+      width: 100%;
+      aspect-ratio: 3/2;
+      max-width: 300px;
+      background-color: #525ef1;
+      position: relative;
+      overflow: hidden;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: auto 100%;
+      transition: all 0.4s ease-in-out;
+      border-radius: 4px;
+
+      .tag {
+        position: absolute;
+        color: #525fe1;
+        background-color: white;
+        border-radius: 4px;
+        padding: 5px 12px;
+        top: 15px;
+        left: 15px;
+      }
+
+      .bookmarkIcon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        padding: 5px;
+        border-radius: 50%;
+        backdrop-filter: blur(10px);
+      }
+    }
+
+    .contentWrapper {
+      display: flex;
+      flex: 1 0 auto;
+      flex-direction: column;
+      padding: 24px;
+      gap: 15px;
+      background-color: #f2f2f2;
+      color: #6f6b80;
+
+      .title {
+        font-size: 20px;
+        line-height: 1.6;
+        font-weight: 700;
+        color: #231f40;
+      }
+
+      .duration {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .reviewWrapper {
+        display: flex;
+        align-items: center;
+        color: $commonColor;
+
+        :global {
+          .ant-rate {
+            font-size: 15px;
+            margin-right: 10px;
+          }
+        }
+      }
+
+      .divider {
+        border-top: 1px solid #e9e9eb;
+        width: 100%;
+      }
+
+      .bottomWrapper {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        >div {
+          display: flex;
+          gap: 6px;
+          font-size: 15px;
+          align-items: center;
+        }
+
+        .priceWrapper {
+          p:first-child {
+            font-weight: 700;
+            font-size: 20px;
+            color: #525fe1;
+          }
+
+          p:nth-child(2) {
+            text-decoration: line-through;
+            font-size: 18px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width:900px) {
+  .listWrapper {
+    .cardWrapper {
+      .imageContainer {
+        max-width: 35%;
+      }
+    }
+  }
+}
+

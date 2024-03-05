@@ -27,3 +27,21 @@
 .root:hover {
   box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
 }
+
+.content {
+  width: 250px;
+
+  >li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 10px;
+    user-select: none;
+    cursor: pointer;
+  }
+
+  >li:hover,
+  >li:active {
+    background-color: #eee;
+  }
+}

@@ -5,16 +5,17 @@ $formWidth: 350px;
   width: 100vw;
   height: 100dvh;
   position: relative;
-  justify-content: center;
-  align-items: center;
+  background-color: #b4e6fd;
   font-size: calc(1.2vw + 10px);
+  overflow: hidden;
 
   .overlay {
-    display: flex;
-    flex: 1 0 0;
+    width: 100%;
+    position: fixed;
     height: 100%;
     background-image: url('../../../public/assets/images/wave.jpg');
-    background-position: -5rem -10rem;
+    // background-position: -5rem -10rem;
+    background-position: -5rem center;
     background-repeat: no-repeat;
     background-size: cover;
   }
@@ -37,7 +38,7 @@ $formWidth: 350px;
     flex-direction: column;
     position: fixed;
     top: 7%;
-    right: calc(#{$formWidth} + 7rem);
+    right: calc(#{$formWidth} + 10rem);
     gap: 2rem;
     width: 100%;
     max-width: 400px;
@@ -68,6 +69,8 @@ $formWidth: 350px;
   }
 
   .formContainer {
+    --theme-color: white;
+
     display: flex;
     flex-direction: column;
     position: fixed;
@@ -78,7 +81,7 @@ $formWidth: 350px;
     max-width: $formWidth;
     padding: 30px 20px;
     height: 100%;
-    color: white;
+    color: var(--theme-color);
     font-size: inherit;
 
     .logoContainer {
@@ -90,12 +93,24 @@ $formWidth: 350px;
       .logo {
         width: 50px;
         height: 50px;
-        background-color: white;
+        background-color: var(--theme-color);
+        ;
         mask-image: url('../../../public/assets/svg/whale.svg');
         mask-size: contain;
         mask-repeat: no-repeat;
         mask-position: center;
       }
+    }
+
+
+    .row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 16px;
+      margin-bottom: 30px;
+      width: fit-content;
+      cursor: pointer;
     }
 
     .col {
@@ -181,6 +196,52 @@ $formWidth: 350px;
     .descriptionWrapper {
       right: calc(#{$formWidth} + 20rem);
       font-size: calc(1.5vw + 10px);
+    }
+  }
+}
+
+@media only screen and (max-width:1200px) and (min-height: 850px) {
+  .root {
+    .overlay {
+      background-size: auto 80%;
+      background-position: -5rem bottom;
+    }
+  }
+}
+
+@media only screen and (max-width:1000px) {
+  .root {
+    .overlay {
+      background-size: auto 70%;
+      background-position: left bottom;
+    }
+
+    .descriptionWrapper {
+      position: relative;
+      right: unset;
+      text-align: start;
+      left: 4%;
+    }
+
+    .formContainer {
+      max-width: 300px;
+    }
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .root {
+
+    .overlay,
+    .mask,
+    .descriptionWrapper {
+      display: none;
+    }
+
+    .formContainer {
+      --theme-color: var(--theme-txt-color2);
+      position: relative;
+      max-width: 100%;
     }
   }
 }

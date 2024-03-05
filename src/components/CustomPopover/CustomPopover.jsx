@@ -1,4 +1,4 @@
-import React, { useRef, memo } from 'react'
+import React, { useRef } from 'react'
 import PopoverContent from './Components/PopoverContent';
 
 const CustomPopover = ({
@@ -36,4 +36,4 @@ const CustomPopover = ({
   )
 }
 
-export default memo(CustomPopover);
+export default CustomPopover;

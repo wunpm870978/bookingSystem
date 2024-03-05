@@ -1,0 +1,109 @@
+$commonColor: #6f6b80;
+$commonColor2: white;
+$commonBgColor: #f5f5f5;
+$commonBgColor2: #525ef1;
+
+.root {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 95%;
+  max-width: 1150px;
+  margin: 0 auto;
+
+  >div {
+    flex-shrink: 0;
+  }
+}
+
+.sortersContainer {
+  // display: inline-block;
+  // vertical-align: top;
+  display: flex;
+  position: relative;
+  gap: 10px;
+
+  >* {
+    flex-shrink: 0;
+  }
+
+  .sortIcon {
+    display: flex;
+    flex: 0 0 16px;
+    width: 16px;
+    aspect-ratio: 1;
+    background-color: #aaa;
+    mask: url('/icon/icon_sort.svg') no-repeat center / contain;
+  }
+}
+
+.switch {
+  display: inline-flex;
+  position: absolute;
+  align-items: center;
+  gap: 12.5px;
+  background-color: #F8F8F8;
+  width: fit-content;
+  padding: 10.5px;
+  border-radius: 7px;
+  --icon-size: 25px;
+  margin-left: auto;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 10px;
+
+  .toggler {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    left: calc(7.5px/2);
+    border-radius: 7px;
+    background: #fff;
+    z-index: 0;
+    transition: transform .3s ease-in-out;
+  }
+
+  >div {
+    width: var(--icon-size);
+    height: var(--icon-size);
+    background-color: #CCCCCC;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.4s ease-in-out;
+    z-index: 1;
+  }
+
+  .grid {
+    mask: url('/icon/grid.svg') no-repeat center / contain
+  }
+
+  .list {
+    mask: url('/icon/list.svg') no-repeat center / contain
+  }
+
+  .active {
+    background-color: #595959;
+  }
+}
+
+.viewWrapper {
+  // display: flex;
+  position: relative;
+  padding: 30px;
+  background-color: white;
+
+  // >div {
+  //   flex-shrink: 0;
+  // }
+}
+
+
+@media only screen and (max-width:480px) {
+  .root {
+    width: 100%;
+  }
+
+  .viewWrapper {
+    padding: 15px;
+  }
+}

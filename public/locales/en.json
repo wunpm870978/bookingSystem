@@ -4,6 +4,7 @@
   "password": "Password",
   "login": {
     "login": "Login",
+    "create": "Create an account",
     "register": "Register",
     "save_username": "Save Email",
     "keep_login": "Keep Login",
@@ -15,7 +16,8 @@
     "confirm": "Confirm",
     "cancel": "Cancel",
     "loading": "Loading",
-    "create": "Create"
+    "create": "Create",
+    "back": "Back"
   },
   "course": {
     "search_placetext": "Course ID/ Name/ Tutor"
