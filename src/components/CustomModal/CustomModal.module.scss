@@ -1,5 +1,5 @@
 .root {
-  z-index: 1000;
+  z-index: 999;
   position: fixed;
   width: 100vw;
   height: 100dvh;
@@ -16,12 +16,12 @@
 }
 
 .closeContainer {
-  z-index: 1000;
+  z-index: 999;
 }
 
 .close {
   position: absolute !important;
-  opacity: 0.3;
+  opacity: 1;
   right: 10px;
   top: 10px;
   width: 30px;
@@ -41,7 +41,7 @@
   content: ' ';
   height: 19px;
   width: 2px;
-  background-color: #333;
+  background-color: #000;
 }
 
 .close:before {
@@ -52,7 +52,7 @@
   transform: rotate(-45deg);
 }
 
-.headerClose{
+.headerClose {
   top: 50%;
   right: 10px;
   transform: translateY(-50%);
@@ -69,11 +69,11 @@
   background-color: white;
   z-index: 10;
 
-  >div {
+  > div {
     flex-shrink: 0;
     position: relative;
   }
-
+  right: 0px;
 }
 
 .header {
@@ -98,19 +98,19 @@
   overflow: hidden;
   height: calc(100% - 999px);
 
-  >* {
+  > * {
     flex-shrink: 0;
   }
 }
 
 .footer {
   display: flex;
+  // box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   width: 100%;
   flex: 0 0 auto;
 }
 
 .contentAnimationSlideUpIn {
-  left: 0px;
   animation: slideUpIn 0.4s forwards;
 }
 
@@ -131,7 +131,6 @@
 }
 
 .contentAnimationSlideUpOut {
-  left: 0px;
   animation: slideUpOut 0.4s forwards;
 }
 
@@ -238,7 +237,12 @@
   }
 }
 
-@media only screen and (max-width:550px) {
+@media only screen and (max-width: 768px) {
+  .header {
+    padding: 15px;
+  }
+}
+@media only screen and (max-width: 550px) {
   .content {
     width: 100%;
     max-width: 100%;

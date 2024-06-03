@@ -1,20 +1,18 @@
 import React, {
   useState,
   useEffect,
-  useCallback,
   isValidElement,
-  useId,
   useRef,
+  useId,
 } from 'react';
 import s from './CustomModal.module.scss';
 import cx from 'classnames';
 import ReactDom from 'react-dom';
-import Overlay from 'components/Overlay/Overlay';
+import Overlay from '../Overlay/Overlay';
 
 const CustomModal = ({
   isOpen = false,
   onClose = () => { },
-  id = useId(),
   parentRef = null,
   /**
    * slide animation
@@ -29,111 +27,102 @@ const CustomModal = ({
   header, // jsx component
   footer, // jsx component
   classname: c = {}, //自訂class 可參考CustomModal.scss改返相關className
-  children
+  children,
 }) => {
+  const modalId = useId();
   const [visible, setVisible] = useState(false);
   const timeoutRef = useRef(null);
 
-  const getAnimation = useCallback(() => {
-    const animation = (entry, leave) => {
-      return {
-        [entry]: isOpen,
-        [leave]: !isOpen
-      }
-    }
+  const getSlidingAnimation = () => {
+    /**
+     * 如有自訂動畫
+     * 請改名叫 .entry && .leave (入場動畫&離場動畫)
+     */
     if (c.entry && c.leave) {
-      return animation(c.entry, s.leave);
+      if (isOpen) return c.entry;
+      return c.leave;
     }
 
     switch (slideAnimation) {
       case 'up':
-        return animation(s.contentSlideUpIn, s.contentSlideUpOut);
+        if (isOpen) return s.contentAnimationSlideUpIn;
+        return s.contentAnimationSlideUpOut;
       case 'down':
-        return animation(s.contentSlideDownIn, s.contentSlideDownOut);
+        if (isOpen) return s.contentAnimationSlideDownIn;
+        return s.contentAnimationSlideDownOut;
       case 'left':
-        return animation(s.contentSlideLeftIn, s.contentSlideLeftOut);
+        if (isOpen) return s.contentAnimationSlideLeftIn;
+        return s.contentAnimationSlideLeftOut;
       case 'right':
-        return animation(s.contentSlideRightIn, s.contentSlideRightOut);
+        if (isOpen) return s.contentAnimationSlideRightIn;
+        return s.contentAnimationSlideRightOut;
       default:
         return;
     }
-  }, [isOpen])
+  };
 
   useEffect(() => {
     if (isOpen) {
-      document.documentElement.style.overflow = "hidden";
-      document.body.style.overflow = "hidden";
+      document.documentElement.style.overflow = 'hidden';
       setVisible(isOpen);
-    } else if (!isOpen && visible) {
+    } else {
       timeoutRef.current = setTimeout(() => {
-        if (!isOpen && document.getElementById(`${id}_modal`)) {
+        const modalList = document.querySelectorAll('[id^=cm_]');
+        if (modalList.length <= 1) document.documentElement.style.overflow = '';
+        if (!isOpen && document.getElementById(modalId)) {
           setVisible(isOpen);
         }
-        document.documentElement.style.overflow = "";
-        document.body.style.overflow = "";
-      }, 300)
+      }, 300);
     }
-    return () => timeoutRef.current && clearTimeout(timeoutRef.current);
-  }, [isOpen])
-
-  useEffect(() => {
-    /** 
-     * cleanup functions 
-     * 1) reset variables
-     * 2) allow scroll for body
-     * 3) detroy element release resources
-     */
     return () => {
-      onClose();
-      setVisible(false);
-      document.body.style.overflow = "";
-      document.documentElement.style.overflow = "";
-      if (document.getElementById(`${id}_modal`)) {
-        if (document.getElementById(`${id}_modal`).parentNode) {
-          document.getElementById(`${id}_modal`).parentNode.removeChild(document.getElementById(`${id}_modal`));
-        }
-      }
-    }
-  }, [])
+      timeoutRef.current && clearTimeout(timeoutRef.current);
+      const modalList = document.querySelectorAll('[id^=cm_]');
+      if (modalList.length <= 1) document.documentElement.style.overflow = '';
+    };
+  }, [isOpen]);
 
   if (!visible) return false;
   return ReactDom.createPortal(
-    <div className={cx(s.root, c.root, parentRef && s.rootWithParent)} id={`${id}_modal`}>
-      <Overlay isOpen={isOpen} onClose={handleClose} />
-      <div className={cx(s.content, c.content, getAnimation())} style={style}>
-        {closeEnabled && !Header && <div className={cx(c.closeContainer || s.closeContainer)}>
-          <div className={cx(s.close, c.close)} onClick={onClose} />
-        </div>}
-        <Header closeEnabled={closeEnabled} c={c} onClose={onClose}>{header}</Header>
-        <div className={cx(c.child || s.child)}>
-          {children}
-        </div>
+    <div
+      className={cx(c['root'] || s.root, { [s.rootWithParent]: !!parentRef })}
+      id={`cm_${modalId}`}
+    >
+      <Overlay classname={c['mask']} isOpen={isOpen} onClose={onClose} />
+      <div
+        className={cx(s.content, c.content, getSlidingAnimation())}
+        style={style}
+      >
+        {closeEnabled && !header && (
+          <div className={cx(c.closeContainer || s.closeContainer)}>
+            <div className={cx(s.close, c.close)} onClick={onClose} />
+          </div>
+        )}
+        <Header closeEnabled={closeEnabled} c={c} onClose={onClose}>
+          {header}
+        </Header>
+        <div className={cx(c.child || s.child)}>{children}</div>
         <Footer c={c}>{footer}</Footer>
       </div>
     </div>,
     parentRef || document.body
-  )
-}
+  );
+};
 
-const Header = ({
-  children,
-  closeEnabled,
-  c,
-  onClose
-}) => {
+const Header = ({ children, closeEnabled, c, onClose }) => {
   if (!isValidElement(children)) return false;
   return (
     <div className={cx(s.header, c.header)}>
       {children}
-      {closeEnabled && <div className={cx(s.close, s.headerClose)} onClick={onClose} />}
+      {closeEnabled && (
+        <div className={cx(s.close, s.headerClose)} onClick={onClose} />
+      )}
     </div>
-  )
-}
+  );
+};
 
 const Footer = ({ children, c }) => {
   if (!isValidElement(children)) return false;
-  return <div className={cx(s.footer, c.footer)}>{children}</div>
-}
-
+  return <div className={cx(s.footer, c.footer)}>{children}</div>;
+};
 
 export default CustomModal;

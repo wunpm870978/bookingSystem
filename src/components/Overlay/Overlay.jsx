@@ -1,4 +1,4 @@
-import React, { useEffect, useId, useState } from 'react';
+import React, { useEffect, useId, useState, useRef } from 'react';
 import s from './Overlay.module.scss';
 import ReactDom from 'react-dom';
 import cx from 'classnames';
@@ -9,10 +9,20 @@ const Overlay = ({
 }) => {
   const id = useId();
   const [visible, setVisible] = useState(false);
+  const timeoutRef = useRef(null);
 
   useEffect(() => {
-    setVisible(isOpen);
-  }, [isOpen])
+    if (isOpen) {
+      setVisible(isOpen);
+    } else {
+      timeoutRef.current = setTimeout(() => {
+        if (!isOpen && document.getElementById(`${id}_overlay`)) {
+          setVisible(isOpen);
+        }
+      }, 300);
+    }
+    return () => timeoutRef.current && clearTimeout(timeoutRef.current);
+  }, [isOpen]);
 
 
   if (!visible) return false;

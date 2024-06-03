@@ -1,0 +1,76 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  transform-origin: center right;
+  width: max-content;
+  max-width: 70%;
+  z-index: 999;
+}
+
+.roottop,
+.roottopright,
+.roottopleft {
+  padding-bottom: 10px;
+}
+
+.content {
+  position: relative;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.75);
+  color: white;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
+}
+
+.content:before {
+  content: '';
+  position: absolute;
+  width: 0;
+  border-top: 8px solid rgba(0, 0, 0, 0.75);
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+}
+
+.topleft:before {
+  top: 100%;
+  right: 20px;
+}
+
+.topright:before {
+  top: 100%;
+  left: 20px;
+}
+
+.top:before {
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.entry {
+  animation: fadeIn 0.2s forwards ease-in-out;
+}
+
+.leave {
+  animation: fadeOut 0.2s forwards ease-in-out;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}

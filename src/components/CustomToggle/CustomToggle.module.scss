@@ -1,0 +1,30 @@
+.toggleWrapper {
+  --padding: 3px;
+  --outerR: 7px;
+  width: fit-content;
+  position: relative;
+  list-style-type: none;
+  border-radius: var(--outerR);
+  padding: var(--padding);
+  background-color: #f8f8f8;
+  flex-wrap: nowrap;
+  overflow: hidden;
+
+  .toggler {
+    position: absolute;
+    background-color: var(--theme-primary-bg-color1);
+    z-index: 0;
+    top: var(--padding);
+    height: calc(100% - var(--padding) * 2);
+    border-radius: calc(var(--outerR) - var(--padding));
+    transition: left 0.3s ease-in-out;
+  }
+
+  .optionWrapper {
+    display: flex;
+    position: relative;
+    list-style-type: none;
+    flex-wrap: nowrap;
+    overflow: hidden;
+  }
+}

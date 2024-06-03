@@ -1,0 +1,21 @@
+.option {
+  padding: 10px 15px;
+  background-color: white;
+  color: #000;
+  user-select: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition: all 0.2s linear;
+}
+
+.option:hover {
+  background-color: #ecf6fd;
+  color: #000;
+  transition: all 0.2s linear;
+}
+
+.selected {
+  background-color: #d1d1d1;
+  color: #fff;
+}

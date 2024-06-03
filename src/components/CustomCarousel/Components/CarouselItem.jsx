@@ -1,21 +1,19 @@
-import React from 'react';
-import cuid from 'cuid';
+import React, { useId } from 'react';
 import cx from 'classnames';
 import s from './CarouselItem.module.scss';
 
 const CarouselItem = ({
-  key = cuid(),
   children,
   itemCount = 1,
   classname: c = {},
 }) => {
+  const key = useId();
+
   return (
     <div
       key={key}
       className={cx(s.slide, c.slide)}
-      style={{
-        width: `calc(100% / ${itemCount})`
-      }}
+      style={{ width: `calc(100% / ${itemCount})` }}
     >
       {children}
     </div>
