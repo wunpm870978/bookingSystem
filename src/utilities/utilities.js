@@ -1,6 +1,10 @@
 import Loadable from 'react-loadable';
 import Loading from 'components/Loading/Loading';
 import get from 'lodash/get';
+import transform from 'lodash/transform';
+import isEqual from 'lodash/isEqual';
+import isObject from 'lodash/isObject';
+import isArray from 'lodash/isArray';
 import { message } from 'antd';
 import i18n from "i18next";
 import encryption from 'js-sha512';
@@ -38,3 +42,17 @@ export const passwordEncryption = (plaintext) => {
 
   return encryption.sha512(processedPlaintext)
 }
+
+export const getDifference = (object, base) => {
+  function changes(object, base) {
+    return transform(object, function (result, value, key) {
+      if (!isEqual(value, base[key])) {
+        result[key] = (isArray(value) && isArray(base[key])) ||
+          !(isObject(value) && isObject(base[key]))
+          ? value
+          : changes(value, base[key]);
+      }
+    });
+  }
+  return changes(object, base);
+};

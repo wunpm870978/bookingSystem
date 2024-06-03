@@ -1,9 +1,9 @@
 import React from "react";
-import s from './Topbar.module.scss';
+import s from './Navbar.module.scss';
 import UserButton from "./Components/UserButton.jsx/UserButton";
 import cx from 'classnames';
 
-const TopbarLayout = ({
+const Navbar = ({
   drawerOnClick = () => { },
 }) => {
   return (
@@ -14,4 +14,4 @@ const TopbarLayout = ({
   )
 }
 
-export default TopbarLayout
+export default Navbar;

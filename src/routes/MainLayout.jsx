@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import CustomDrawer from "components/CustomDrawer/CustomDrawer";
 import s from './MainLayout.module.scss'
-import TopbarLayout from "components/Topbar/Topbar";
+import Navbar from "components/Navbar/Navbar";
 
 const mapStateToProps = (state) => ({
   user: state.user,
@@ -18,7 +18,7 @@ const MainLayout = ({ children }) => {
         onClose={() => setIsDrawerOpen(false)}
       />
       <div className={s.contentWrapper}>
-        <TopbarLayout
+        <Navbar
           drawerOnClick={() => setIsDrawerOpen(prev => !prev)}
         />
         <div className={s.innerContent}>
