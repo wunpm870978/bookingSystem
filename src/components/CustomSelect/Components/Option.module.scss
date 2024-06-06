@@ -1,4 +1,6 @@
 .option {
+  display: flex;
+  position: relative;
   padding: 10px 15px;
   background-color: white;
   color: #000;
@@ -6,16 +8,30 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  font-size: 16px;
   transition: all 0.2s linear;
+  align-items: center;
+
+  >span {
+    flex: 1 0 0;
+  }
+
+  >img {
+    flex: 0 0 auto;
+    width: 15px;
+    aspect-ratio: 1;
+    object-fit: contain;
+    filter: invert(34%) sepia(90%) saturate(2204%) hue-rotate(204deg) brightness(98%) contrast(108%);
+  }
 }
 
 .option:hover {
-  background-color: #ecf6fd;
-  color: #000;
+  background-color: #d1d1d1;
+  color: #fff;
   transition: all 0.2s linear;
 }
 
 .selected {
-  background-color: #d1d1d1;
-  color: #fff;
+  background-color: #ecf6fd;
+  color: #000;
 }

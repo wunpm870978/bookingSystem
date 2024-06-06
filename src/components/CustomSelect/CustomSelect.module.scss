@@ -1,6 +1,6 @@
 .root {
   display: flex;
-  flex: 1 0 auto;
+  position: relative;
   width: 100%;
   justify-content: space-between;
   align-items: center;
@@ -14,7 +14,7 @@
   user-select: none;
   gap: 10px;
 
-  > * {
+  >* {
     flex-shrink: 0;
   }
 }
@@ -46,6 +46,14 @@
 
 .icon {
   flex: 0 0 auto;
+  cursor: pointer;
+
+  .arrow{
+    object-fit: contain;
+    width: 12px;
+    aspect-ratio: 1;
+    margin: auto;
+  }
 }
 
 input:disabled {

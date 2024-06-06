@@ -1,0 +1,47 @@
+.tag {
+  display: flex;
+  flex: 0 0 auto;
+  position: relative;
+  width: fit-content;
+  background-color: var(--theme-primary-bg-color1);
+  color: var(--theme-txt-color2);
+  padding: 0px 10px 0px 8px;
+  border-radius: var(--r);
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  gap: 5px;
+  cursor: pointer;
+  user-select: none;
+  min-height: 27px;
+  touch-action: none;
+  z-index: 3;
+
+  .close {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    width: 14px;
+    height: 14px;
+    color: #0000006e;
+    z-index: 10;
+  }
+
+  .close:before,
+  .close:after {
+    content: ' ';
+    position: absolute;
+    height: 10px;
+    width: 1px;
+    background-color: #0000006e;
+  }
+
+  .close:before {
+    transform: rotate(45deg);
+  }
+
+  .close:after {
+    transform: rotate(-45deg);
+  }
+}
