@@ -6,6 +6,7 @@ import { I18nextProvider } from 'react-i18next';
 import { store } from './actions/store'
 import { Provider } from 'react-redux'
 import './index.module.scss';
+import 'animate.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
