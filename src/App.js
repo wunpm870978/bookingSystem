@@ -4,13 +4,13 @@ import LoginAuthentication from 'actions/auth/login';
 import { getLoadableComponent } from 'utilities/utilities';
 import MainLayout from 'routes/MainLayout';
 
-const LoginPage = getLoadableComponent(() => import('routes/Login/Login'));
+const LoginPage = getLoadableComponent(() => import('routes/login/Login'));
 const Test = getLoadableComponent(() => import('routes/Test'));
 const Test2 = getLoadableComponent(() => import('routes/Test2'));
-const ScheduleLayout = getLoadableComponent(() => import('routes/Schedule/ScheduleLayout'));
-const CourseEnrollment = getLoadableComponent(() => import('routes/Course/Customer/CourseEnrollment'));
-const CourseTable = getLoadableComponent(() => import('routes/Course/Shop/CourseTable'));
-const ShopTable = getLoadableComponent(() => import('routes/Shop/ShopTable'));
+const ScheduleLayout = getLoadableComponent(() => import('routes/schedule/ScheduleLayout'));
+const CourseEnrollment = getLoadableComponent(() => import('routes/course/customer/CourseEnrollment'));
+const CourseTable = getLoadableComponent(() => import('routes/course/shop/CourseTable'));
+const ShopTable = getLoadableComponent(() => import('routes/shop/ShopTable'));
 
 function App() {
   return (
