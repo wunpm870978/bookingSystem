@@ -6,15 +6,15 @@ import noop from 'lodash/noop';
 
 const CustomInput = ({
   value,
-  type,
+  type, /** HTML Input Types */
   label,
   placeholder,
   maxLength,
-  disabled,
-  max,
-  min,
+  disabled, /** character maximun length */
+  max, /** maximun number value */
+  min, /** minimum number value */
   reg,
-  onChange,
+  onChange, 
   onFocus,
   onBlur,
   className: c,
@@ -36,7 +36,7 @@ const CustomInput = ({
   const inputOnChange = (e) => {
     if (type === 'number') {
       if (e.target.value === 'e') return;
-      e.target.value = Math.max(Math.min(e.target.value, max), min);
+      e.target.value = Math.max(Math.min(e.target.value, max), min) || '';
     }
     onChange(e);
   }
@@ -56,7 +56,7 @@ const CustomInput = ({
         disabled={disabled}
         placeholder={placeholder}
         ref={inputRef}
-        value={type === 'number' && value === 0 ? '' : value}
+        value={value}
         onChange={inputOnChange}
         onFocus={onFocus}
         onBlur={onBlur}
@@ -75,6 +75,7 @@ const CustomInput = ({
 }
 
 CustomInput.defaultProps = {
+  value: '',
   type: 'text',
   label: '',
   placeholder: '',
@@ -104,7 +105,7 @@ CustomInput.propTypes = {
     PropTypes.string,
     PropTypes.number
   ]),
-  type: PropTypes.string,
+  type: PropTypes.oneOf(['text', 'number', 'password']),
   placeholder: PropTypes.string,
   maxLength: PropTypes.number,
   disabled: PropTypes.bool,
