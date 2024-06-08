@@ -9,7 +9,7 @@ import { withTranslation } from 'react-i18next';
 import { passwordEncryption } from "utilities/utilities";
 import API from "services/API";
 import { updateUser } from "actions/reducers/user";
-
+import CustomInput from "components/CustomInput/CustomInput";
 
 const LoginPage = ({ t, i18n }) => {
   const {
@@ -39,11 +39,11 @@ const LoginPage = ({ t, i18n }) => {
     const { username, password } = loginData;
     if (username && password) {
       try {
-        // const { data } = await API.auth.userLogin({
-        //   username,
-        //   password: passwordEncryption(password)
-        // })
-        dispatch(updateUser({ email: username }))
+        const { data } = await API.auth.userLogin({
+          username,
+          password: passwordEncryption(password)
+        })
+        dispatch(updateUser(data))
       } catch (err) {
 
       }
@@ -87,21 +87,18 @@ const LoginPage = ({ t, i18n }) => {
               <p>Booking</p>
             </div>
             <div className={s.col}>
-              <p>{t('email')}</p>
-              <Input
+              <CustomInput
+                label={t('email')}
                 value={loginData.username}
                 onChange={(e) => handleLoginOnChange('username', e.target.value)}
-                size="large"
-                prefix={<UserOutlined />}
-
               />
             </div>
             <div className={s.col}>
-              <p>{t('password')}</p>
-              <Input.Password
+              <CustomInput
+                type='password'
+                label={t('password')}
                 value={loginData.password}
                 onChange={(e) => handleLoginOnChange('password', e.target.value)}
-                size="large"
               />
             </div>
             <div className={s.forgetpw}>

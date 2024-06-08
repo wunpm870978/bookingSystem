@@ -17,6 +17,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="login" element={<LoginPage />} />
+        <Route path="verification" element={<LoginPage />} />
         <Route
           path='/'
           element={
@@ -35,8 +36,8 @@ function App() {
           <Route path='course' element={<CourseTable />} />
           <Route path='course2' element={<CourseEnrollment />} />
           <Route path='schedule' element={<ScheduleLayout />} />
-          <Route index path='*' element={<Test2 />} />
         </Route>
+        <Route path='/' element={<Test2 />} />
         <Route index path='*' element={<Test2 />} />
       </Routes>
     </BrowserRouter>
