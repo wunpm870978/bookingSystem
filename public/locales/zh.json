@@ -6,7 +6,8 @@
     "login": "登入",
     "save_username": "記住賬號",
     "keep_login": "保持登入狀態",
-    "login_fail": "登入失敗"
+    "login_fail": "登入失敗",
+    "forget_password": "忘記密碼"
   },
   "general": {
     "confirm": "確定",

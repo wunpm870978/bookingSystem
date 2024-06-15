@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState } from 'react';
 import s from './CustomInput.module.scss';
 import cx from 'classnames';
 import { PropTypes } from 'prop-types';
@@ -14,15 +14,18 @@ const CustomInput = ({
   max, /** maximun number value */
   min, /** minimum number value */
   reg,
-  onChange, 
+  onChange,
   onFocus,
   onBlur,
   className: c,
   prefix,
   suffix,
+  error,
+  errorText,
 }) => {
   const inputRef = useRef(null);
   const [isPreview, setIsPreview] = useState(false);
+  const [isError, setIsError] = useState(error);
 
   const previewPasswordOnChange = () => {
     inputRef.current.getAttribute('type');
@@ -41,36 +44,45 @@ const CustomInput = ({
     onChange(e);
   }
 
+  const handleOnBlur = () => {
+    setIsError(!reg.test(value));
+    onBlur();
+  };
+
   return (
-    <span className={cx(s.inputRoot, c.inputRoot)}>
-      {prefix && <span className={cx(s.prefix, c.prefix)}>{prefix}</span>}
-      <label className={cx(s.label, { [s.textFilled]: value })}>{label}</label>
-      <input
-        className={c.input}
-        type={type}
-        autoComplete='off'
-        autoCorrect='off'
-        autoCapitalize='off'
-        spellCheck='false'
-        maxLength={maxLength}
-        disabled={disabled}
-        placeholder={placeholder}
-        ref={inputRef}
-        value={value}
-        onChange={inputOnChange}
-        onFocus={onFocus}
-        onBlur={onBlur}
-      />
-      {suffix && <span className={cx(s.suffix, c.suffix)}>{suffix}</span>}
-      {type === 'password' && <span className={s.password}>
-        <img
-          className={s.eye}
-          onClick={previewPasswordOnChange}
-          src={`/assets/svg/eye-${isPreview ? 'hide' : 'view'}.svg`}
+    <div className={cx(s.container, c.container)}>
+      <span className={cx(s.inputRoot, c.inputRoot)}>
+        {prefix && <span className={cx(s.prefix, c.prefix)}>{prefix}</span>}
+        {label && <label className={cx(s.label, { [s.textFilled]: value })}>{label}</label>}
+        <input
+          type={type}
+          autoComplete='off'
+          autoCorrect='off'
+          autoCapitalize='off'
+          spellCheck='false'
+          maxLength={maxLength}
+          disabled={disabled}
+          placeholder={placeholder}
+          ref={inputRef}
+          value={value}
+          onChange={inputOnChange}
+          onFocus={onFocus}
+          onBlur={handleOnBlur}
         />
-      </span>}
-      <fieldset><legend>{label}</legend></fieldset>
-    </span>
+        {suffix && <span className={cx(s.suffix, c.suffix)}>{suffix}</span>}
+        {type === 'password' && <span className={s.password}>
+          <img
+            className={s.eye}
+            onClick={previewPasswordOnChange}
+            src={`/assets/svg/eye-${isPreview ? 'hide' : 'view'}.svg`}
+          />
+        </span>}
+        <fieldset className={cx({ [s.error]: isError })}>
+          {label && <legend>{label}</legend>}
+        </fieldset>
+      </span>
+      {isError && <p>{errorText}</p>}
+    </div>
   )
 }
 
@@ -83,15 +95,17 @@ CustomInput.defaultProps = {
   disabled: false,
   max: Number.POSITIVE_INFINITY,
   min: Number.NEGATIVE_INFINITY,
-  reg: /.*/g,
+  reg: /.*/,
   className: {
+    container: '',
     inputRoot: '',
     prefix: '',
-    input: '',
     suffix: '',
   },
   prefix: null,
   suffix: null,
+  error: false,
+  errorText: '',
   onChange: noop,
   onFocus: noop,
   onBlur: noop,
@@ -116,13 +130,15 @@ CustomInput.propTypes = {
   onFocus: PropTypes.func,
   onBlur: PropTypes.func,
   className: PropTypes.shape({
+    container: PropTypes.string,
     inputRoot: PropTypes.string,
     prefix: PropTypes.string,
-    input: PropTypes.string,
     suffix: PropTypes.string
   }),
   prefix: PropTypes.node,
   suffix: PropTypes.node,
+  error: PropTypes.bool,
+  errorText: PropTypes.string
 };
 
 export default CustomInput;

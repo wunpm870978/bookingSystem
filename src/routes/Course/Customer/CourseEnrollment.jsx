@@ -3,10 +3,30 @@ import s from './CourseEnrollment.module.scss';
 import { Segmented, Input, Select } from 'antd';
 import { AppstoreOutlined, BarsOutlined, FilterOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
-import { FAKE_OPTIONS } from 'constant.js'
 
 const { Search } = Input;
-
+const FAKE_OPTIONS = [
+  {
+      label: `空中瑜伽`,
+      value: 'air',
+  },
+  {
+      label: `地面瑜伽`,
+      value: 'ground',
+  },
+  {
+      label: `雙人瑜伽`,
+      value: 'double',
+  },
+  {
+      label: `單人瑜伽`,
+      value: 'single',
+  },
+  {
+      label: `爆旋陀螺`,
+      value: 'rolling',
+  },
+]
 const CourseEnrollment = () => {
     const [itemFormat, setItemFormat] = useState('list');
     const [filterList, setFilterList] = useState([]);

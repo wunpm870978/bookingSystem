@@ -9,18 +9,18 @@ export default {
     });
   },
   userLogin({ username, password }) {
-    return new Promise((resolve) => {
-      resolve({
-        data: {
-          email: username
-        },
-        status: 200
-      })
-    })
-    // return API.API({
-    //   method: 'POST',
-    //   url: `/auth/login/`,
-    //   data: { username, password },
-    // });
+    // return new Promise((resolve) => {
+    //   resolve({
+    //     data: {
+    //       email: username
+    //     },
+    //     status: 200
+    //   })
+    // })
+    return API.API({
+      method: 'POST',
+      url: `/auth/login/`,
+      data: { username, password },
+    });
   }
 }

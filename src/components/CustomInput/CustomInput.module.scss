@@ -2,8 +2,18 @@ $pad: 5px;
 $title-size: 13px;
 $legend-padh: 5px;
 $legend-ml: 5px;
-
 $root-left: $pad + $legend-padh + $legend-ml;
+
+.container {
+  position: relative;
+  width: 100%;
+
+  >p {
+    color: #d32f2f;
+    margin: 3px $root-left 0px $root-left;
+    font-size: 12px;
+  }
+}
 
 .inputRoot {
   display: flex;
@@ -37,6 +47,10 @@ $root-left: $pad + $legend-padh + $legend-ml;
       margin: 0px 0px 0px $legend-ml;
       visibility: hidden;
     }
+  }
+
+  .error {
+    border: 1px groove #d32f2f !important;
   }
 
   .label {
@@ -130,7 +144,7 @@ $root-left: $pad + $legend-padh + $legend-ml;
   }
 }
 
-.inputRoot:has(>input:focus) {
+.inputRoot:focus-within {
   .label {
     color: #1976d2;
     font-size: $title-size;
@@ -145,5 +159,17 @@ $root-left: $pad + $legend-padh + $legend-ml;
       padding: 0px $legend-padh;
       width: auto;
     }
+  }
+
+  .error {
+    border: 2px groove #d32f2f !important;
+  }
+}
+
+.inputRoot:focus-within:has(.error) {
+  .label {
+    color: #d32f2f;
+    font-size: $title-size;
+    transform: translate(0, -30px);
   }
 }
