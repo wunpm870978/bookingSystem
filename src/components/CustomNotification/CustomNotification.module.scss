@@ -5,10 +5,33 @@
   align-items: center;
   padding: 0px 15px;
   border-radius: 10px;
-  height: 60px;
+  height: 50px;
   background-color: white;
   box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
   overflow: hidden;
+  gap: 10px;
+
+  >img {
+    width: 20px;
+    aspect-ratio: 1;
+    object-fit: contain;
+  }
+}
+
+.info {
+  filter: invert(59%) sepia(55%) saturate(497%) hue-rotate(157deg) brightness(106%) contrast(94%);
+}
+
+.success {
+  filter: invert(84%) sepia(33%) saturate(498%) hue-rotate(65deg) brightness(84%) contrast(85%);
+}
+
+.warning {
+  filter: invert(76%) sepia(61%) saturate(581%) hue-rotate(330deg) brightness(101%) contrast(102%);
+}
+
+.error {
+  filter: invert(34%) sepia(31%) saturate(6106%) hue-rotate(344deg) brightness(90%) contrast(91%);
 }
 
 .top {

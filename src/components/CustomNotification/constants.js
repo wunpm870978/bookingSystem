@@ -10,9 +10,8 @@ export const POSITION = {
 export const MESSAGE_TYPE = {
   INFO: 'info',
   WARNING: 'warning',
-  ERROR: 'error',
   SUCCESS: 'success',
-  FAIL: 'fail '
+  ERROR: 'error '
 }
 
 export const DURATION = 3000;

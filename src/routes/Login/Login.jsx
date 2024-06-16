@@ -28,7 +28,7 @@ const LoginPage = ({ t, i18n }) => {
     handleLangOnChange,
     loginOnSubmit,
     registerOnSubmit,
-  } = useLogin({ i18n });
+  } = useLogin({ t, i18n });
 
 
   if (!isEmpty(user)) return <Navigate to="/" replace={true} />
@@ -69,7 +69,6 @@ const LoginPage = ({ t, i18n }) => {
             <div className={s.divider} />
             <Button className={s.loginBtn} onClick={() => setActionType(REGISTER)}>
               {t('login.register')}
-
             </Button>
           </React.Fragment>,
           REGISTER: <React.Fragment>

@@ -10,8 +10,9 @@ import { passwordEncryption } from "utilities/utilities";
 import API from "services/API";
 import { updateUser } from "actions/reducers/user";
 import isEmpty from "lodash/isEmpty";
+import { noti } from "components/CustomNotification/Notification";
 
-const useLogin = ({ i18n }) => {
+const useLogin = ({ t, i18n }) => {
   const [loginData, setLoginData] = useState(LOGIN_DEFAULT);
   const [registerData, setRegisterData] = useState(REGISTER_DEFAULT);
   const [actionType, setActionType] = useState(LOGIN);
@@ -41,12 +42,13 @@ const useLogin = ({ i18n }) => {
     const { username, password } = loginData;
     if (username && password) {
       try {
-        const { data } = await API.auth.userLogin({
+        const { data } = await API.auth.login({
           username,
           password: passwordEncryption(password)
         })
         dispatch(updateUser(data))
       } catch (err) {
+        noti('warning', t('login.login_fail'))
         console.log('loginOnSubmit', err)
       }
     }
@@ -62,6 +64,14 @@ const useLogin = ({ i18n }) => {
   const registerOnSubmit = async () => {
     const error = registerDataValidation(registerData);
     if (!isEmpty(error)) {
+
+    }
+    try {
+      const response = await API.auth.register(registerData);
+      if (response.status === 201) {
+
+      }
+    } catch (err) {
 
     }
   }

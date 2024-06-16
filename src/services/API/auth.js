@@ -8,7 +8,7 @@ export default {
       data: { username, password },
     });
   },
-  userLogin({ username, password }) {
+  login({ username, password }) {
     // return new Promise((resolve) => {
     //   resolve({
     //     data: {
@@ -22,5 +22,12 @@ export default {
       url: `/auth/login/`,
       data: { username, password },
     });
-  }
+  },
+  register(payload) {
+    return API.API({
+      method: 'POST',
+      url: `/auth/register/`,
+      data: payload,
+    });
+  },
 }

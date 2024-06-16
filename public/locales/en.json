@@ -2,6 +2,9 @@
   "lang": "lang",
   "email": "Email",
   "password": "Password",
+  "error": {
+    "unknown":"Something happened. Please contact us."
+  },
   "login": {
     "login": "Login",
     "create": "Create an account",
@@ -11,7 +14,9 @@
     "keep_login": "Keep Login",
     "title_1": "Making Schedule",
     "title_2": "Better for Everyone",
-    "description": "Bookin YL is dedicated to automating and optimizing management system, assits you planning of time. Boost productivity today!"
+    "description": "Bookin YL is dedicated to automating and optimizing management system, assits you planning of time. Boost productivity today!",
+    "login_fail": "Incorrect email or password",
+    "login_err": "Something"
   },
   "general": {
     "confirm": "Confirm",

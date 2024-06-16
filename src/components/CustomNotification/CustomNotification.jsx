@@ -2,10 +2,11 @@ import React, { useEffect, useRef, useState } from 'react';
 import s from './CustomNotification.module.scss';
 import cx from 'classnames';
 import { PropTypes } from 'prop-types';
-import { POSITION } from './constants';
+import { POSITION, MESSAGE_TYPE } from './constants';
 
 const CustomNotification = ({
   position,
+  messageType,
   message,
   duration,
   containerNode,
@@ -46,18 +47,29 @@ const CustomNotification = ({
         [s.fadeInDown]: visible,
         [s.fadeOut]: !visible,
       })}>
+      <Icon messageType={messageType} />
       {message}
     </div>
   )
 }
 
+const Icon = ({ messageType }) => {
+  return <img
+    className={s[messageType]}
+    src={`/assets/svg/${messageType}.svg`}
+    alt=''
+  />
+}
+
 CustomNotification.defaultProps = {
   position: POSITION.TOP,
-  message: 'hello world',
+  messageType: MESSAGE_TYPE.INFO,
+  message: '',
   duration: 3000,
 }
 CustomNotification.propTypes = {
   position: PropTypes.string,
+  messageType: PropTypes.string,
   message: PropTypes.string,
   duration: PropTypes.oneOfType([
     PropTypes.string,
