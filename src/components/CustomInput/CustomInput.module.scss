@@ -3,173 +3,246 @@ $title-size: 13px;
 $legend-padh: 5px;
 $legend-ml: 5px;
 $root-left: $pad + $legend-padh + $legend-ml;
+$default-root-left: 6px;
+
 
 .container {
   position: relative;
   width: 100%;
 
-  >p {
-    color: #d32f2f;
-    margin: 3px $root-left 0px $root-left;
-    font-size: 12px;
-  }
-}
-
-.inputRoot {
-  display: flex;
-  position: relative;
-  width: 100%;
-  height: 50px;
-  border: none;
-  outline: none;
-  outline-color: transparent;
-  color: #000;
-  column-gap: 5px;
-  transition: all 0.3s;
-
-  >fieldset {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    margin: 0;
+  .inputRoot {
+    display: flex;
+    position: relative;
     width: 100%;
-    height: 100%;
-    border: 1px groove #c4c4c4;
-    border-radius: 4px;
-    padding: $pad;
-    transition: border 0.2s ease-in-out;
+    height: 50px;
+    border: none;
+    outline: none;
+    outline-color: transparent;
+    color: #000;
+    column-gap: 5px;
+    transition: all 0.3s;
 
-    >legend {
-      font-size: $title-size;
+
+    >fieldset {
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      padding: $pad;
+      transition: border 0.2s ease-in-out;
+
+      >legend {
+        font-size: $title-size;
+        line-height: 1;
+        width: 0px;
+        padding: 0px;
+        margin: 0px 0px 0px $legend-ml;
+        visibility: hidden;
+      }
+    }
+
+    .label {
+      position: absolute;
+      top: calc(50% + $pad - 2px);
+      font-size: 16px;
+      color: #909090;
       line-height: 1;
-      width: 0px;
-      padding: 0px;
-      margin: 0px 0px 0px $legend-ml;
-      visibility: hidden;
+      transform: translate(0, -50%);
+      transform-origin: top left;
+      transition: all 0.3s ease-out;
+    }
+
+    .prefix,
+    .suffix,
+    .password {
+      flex: 0 0 auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 14px;
+      padding-top: $pad;
+      z-index: 2;
+    }
+
+    .password {
+      padding-right: 10px;
+    }
+
+    .eye {
+      width: 18px;
+      aspect-ratio: 1;
+      object-fit: contain;
+      cursor: pointer;
+      filter: invert(47%) sepia(1%) saturate(0%) hue-rotate(350deg) brightness(96%) contrast(83%);
+    }
+
+    >input {
+      flex: 1 0 0;
+      height: 100%;
+      margin: 0;
+      background: transparent;
+      border: none;
+      outline: none;
+      appearance: none;
+      font-family: inherit;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-wrap: nowrap;
+      white-space: nowrap;
+      z-index: 1;
+    }
+
+    >input::placeholder,
+    >input::-ms-input-placeholder {
+      color: #eee;
+      opacity: 1;
+    }
+
+    >input::-webkit-outer-spin-button,
+    >input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    >textarea:focus,
+    input:focus {
+      outline: none;
+    }
+
+    .textFilled {
+      color: #909090;
+      font-size: $title-size;
+      transform: translate(0, -30px);
     }
   }
 
-  .error {
-    border: 1px groove #d32f2f !important;
-  }
-
-  .label {
-    position: absolute;
-    top: calc(50% + $pad - 2px);
-    left: 15px;
-    font-size: 16px;
-    color: #909090;
-    line-height: 1;
-    transform: translate(0, -50%);
-    transform-origin: top left;
-    transition: all 0.3s ease-out;
-  }
-
-  .prefix,
-  .suffix,
-  .password {
-    flex: 0 0 auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 14px;
-    padding-top: $pad;
-    z-index: 2;
-  }
-
-  .password {
-    padding-right: 10px;
-  }
-
-  .eye {
-    width: 18px;
-    aspect-ratio: 1;
-    object-fit: contain;
-    cursor: pointer;
-    filter: invert(47%) sepia(1%) saturate(0%) hue-rotate(350deg) brightness(96%) contrast(83%);
-  }
-
-  >input {
-    flex: 1 0 0;
-    height: 100%;
-    margin: 0;
-    padding: $pad $root-left 0px $root-left;
-    background: transparent;
-    border: none;
-    outline: none;
-    appearance: none;
-    font-family: inherit;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    text-wrap: nowrap;
-    white-space: nowrap;
-    z-index: 1;
-  }
-
-  >input::placeholder,
-  >input::-ms-input-placeholder {
-    color: #eee;
-    opacity: 1;
-  }
-
-  >input::-webkit-outer-spin-button,
-  >input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-
-  >textarea:focus,
-  input:focus {
-    outline: none;
-  }
-
-  .textFilled {
-    color: #909090;
-    font-size: $title-size;
-    transform: translate(0, -30px);
-  }
-}
-
-.inputRoot:hover {
-  >fieldset {
-    border: 1px groove black;
-  }
-}
-
-.inputRoot:has(.textFilled) {
-  >fieldset>legend {
-    display: block;
-    padding: 0px $legend-padh;
-    width: auto;
-  }
-}
-
-.inputRoot:focus-within {
-  .label {
-    color: #1976d2;
-    font-size: $title-size;
-    transform: translate(0, -30px);
-  }
-
-  >fieldset {
-    border: groove #1976d2 2px;
-
-    >legend {
+  .inputRoot:has(.textFilled) {
+    >fieldset>legend {
       display: block;
       padding: 0px $legend-padh;
       width: auto;
     }
   }
 
-  .error {
-    border: 2px groove #d32f2f !important;
+  .inputRoot:focus-within {
+    .label {
+      color: #1976d2;
+      font-size: $title-size;
+      transform: translate(0, -30px);
+    }
+
+    >fieldset {
+
+      >legend {
+        display: block;
+        padding: 0px $legend-padh;
+        width: auto;
+      }
+    }
+  }
+
+  .inputRoot:focus-within:has(.error) {
+    .label {
+      color: #d32f2f;
+      font-size: $title-size;
+      transform: translate(0, -30px);
+    }
   }
 }
 
-.inputRoot:focus-within:has(.error) {
-  .label {
+.outline {
+
+  >p {
     color: #d32f2f;
-    font-size: $title-size;
-    transform: translate(0, -30px);
+    margin: 3px $root-left 0px $root-left;
+    font-size: 12px;
+  }
+
+  .inputRoot {
+
+    >fieldset {
+      border: 1px groove #c4c4c4;
+      border-radius: 4px;
+    }
+
+    .error {
+      border: 1px groove #d32f2f !important;
+    }
+
+    .label {
+      left: 16px;
+    }
+
+    >input {
+      padding: $pad $root-left 0px $root-left;
+    }
+  }
+
+  .inputRoot:hover {
+    >fieldset {
+      border: 1px groove black;
+    }
+  }
+
+  .inputRoot:focus-within {
+
+    >fieldset {
+      border: groove #1976d2 2px;
+    }
+
+    .error {
+      border: 2px groove #d32f2f !important;
+    }
+  }
+
+}
+
+.default {
+
+  >p {
+    color: #d32f2f;
+    margin: 3px $default-root-left 0px $default-root-left;
+    font-size: 12px;
+  }
+
+  .inputRoot {
+
+    >fieldset {
+      border: transparent;
+      border-bottom: 1px groove #c4c4c4;
+      padding: $pad;
+      transition: border 0.2s ease-in-out;
+    }
+
+    .error {
+      border-bottom: 1px groove #d32f2f !important;
+    }
+
+    .label {
+      left: $default-root-left;
+    }
+
+    >input {
+      padding: $pad $default-root-left 0px $default-root-left;
+    }
+  }
+
+  .inputRoot:hover {
+    >fieldset {
+      border-bottom: 1px groove black;
+    }
+  }
+
+  .inputRoot:focus-within {
+
+    >fieldset {
+      border-bottom: groove #1976d2 2px;
+    }
+
+    .error {
+      border-bottom: 2px groove #d32f2f !important;
+    }
   }
 }

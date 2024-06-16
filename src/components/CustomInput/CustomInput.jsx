@@ -1,10 +1,12 @@
 import React, { useRef, useState } from 'react';
+import './CustomInput.module.scss';
 import s from './CustomInput.module.scss';
 import cx from 'classnames';
 import { PropTypes } from 'prop-types';
 import noop from 'lodash/noop';
 
 const CustomInput = ({
+  outline,
   value,
   type, /** HTML Input Types */
   label,
@@ -50,7 +52,10 @@ const CustomInput = ({
   };
 
   return (
-    <div className={cx(s.container, c.container)}>
+    <div className={cx(s.container, {
+      [s.outline]: outline,
+      [s.default]: !outline
+    }, c.container)}>
       <span className={cx(s.inputRoot, c.inputRoot)}>
         {prefix && <span className={cx(s.prefix, c.prefix)}>{prefix}</span>}
         {label && <label className={cx(s.label, { [s.textFilled]: value })}>{label}</label>}
@@ -77,16 +82,17 @@ const CustomInput = ({
             src={`/assets/svg/eye-${isPreview ? 'hide' : 'view'}.svg`}
           />
         </span>}
-        <fieldset className={cx({ [s.error]: isError })}>
+        <fieldset className={cx({ [s.error]: error || isError })}>
           {label && <legend>{label}</legend>}
         </fieldset>
       </span>
-      {isError && <p>{errorText}</p>}
+      {(error || isError) && <p>{errorText}</p>}
     </div>
   )
 }
 
 CustomInput.defaultProps = {
+  outline: false,
   value: '',
   type: 'text',
   label: '',
@@ -111,6 +117,7 @@ CustomInput.defaultProps = {
   onBlur: noop,
 }
 CustomInput.propTypes = {
+  outline: PropTypes.bool,
   label: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number
