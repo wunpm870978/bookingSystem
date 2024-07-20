@@ -1,0 +1,10 @@
+.root {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  gap: 30px;
+
+  >* {
+    flex: 0 0 auto;
+  }
+}

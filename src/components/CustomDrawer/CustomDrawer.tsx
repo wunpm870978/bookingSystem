@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState, useRef, ReactNode } from 'react';
 import s from './CustomDrawer.module.scss';
 import {
   MailOutlined,
@@ -13,17 +13,17 @@ import {
   ReadOutlined,
 } from '@ant-design/icons';
 import { useNavigate } from "react-router-dom";
-import { connect, useDispatch } from "react-redux";
-import { handleLogout } from 'actions/reducers/global';
-import CustomMenu from 'components/CustomMenu/CustomMenu';
+import { useDispatch } from "react-redux";
+import { logout } from '../../actions/reducers/user';
+import CustomMenu from '../CustomMenu/CustomMenu';
 import cx from 'classnames';
-import Overlay from 'components/Overlay/Overlay';
+import Overlay from '../Overlay/Overlay';
 
-const mapStateToProps = (state) => ({
-  role: state.user.role,
-});
-
-const MenuItem = (title, route, icon) => (
+const MenuItem = (
+  title: string,
+  route: string,
+  icon: ReactNode
+) => (
   <CustomMenu.Item
     icon={icon}
     value={route}
@@ -36,12 +36,13 @@ const CustomDrawer = ({
   isOpen = false,
   onClose = () => { },
 }) => {
-  const [visible, setVisible] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [selectedValue, setSelectedValue] = useState('/');
+  const [visible, setVisible] = useState<boolean>(false);
+  const [selectedValue, setSelectedValue] = useState<string>('/');
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const menuItemOnClick = useCallback((value) => {
+  const menuItemOnClick = useCallback((value: string) => {
     if (value === '/login') {
       // dispatch(handleLogout())
     }
@@ -53,9 +54,13 @@ const CustomDrawer = ({
     if (isOpen && !visible) {
       setVisible(true)
     } else if (!isOpen && visible) {
-      setTimeout(() => {
+      timeoutRef.current = setTimeout(() => {
         setVisible(false);
       }, 400)
+    }
+
+    return () => {
+      timeoutRef.current && clearTimeout(timeoutRef.current);
     }
   }, [isOpen])
 
@@ -92,4 +97,4 @@ const CustomDrawer = ({
   )
 }
 
-export default connect(mapStateToProps)(CustomDrawer);
+export default CustomDrawer;

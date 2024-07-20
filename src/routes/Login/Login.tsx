@@ -1,4 +1,4 @@
-import React from "react";
+import { Fragment, FC, ChangeEvent, MouseEventHandler } from "react";
 import { useSelector } from "react-redux";
 import { LeftOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
@@ -6,17 +6,23 @@ import s from './Login.module.scss';
 import isEmpty from "lodash/isEmpty";
 import { Navigate } from "react-router-dom";
 import { withTranslation } from 'react-i18next';
-import CustomInput from "components/CustomInput/CustomInput";
+import CustomInput from "../../components/CustomInput/CustomInput";
 import useLogin from "./useLogin";
 import {
   LOGIN,
   REGISTER,
 } from "./LoginConstants";
+import { RootState } from "../../actions/store";
 
-const LoginPage = ({ t, i18n }) => {
+interface LoginPageProps {
+  t: any,
+  i18n: any
+}
+
+const LoginPage: FC<LoginPageProps> = ({ t, i18n }) => {
   const {
     user
-  } = useSelector((state) => ({
+  } = useSelector((state: RootState) => ({
     user: state.user.user
   }))
   const {
@@ -36,28 +42,30 @@ const LoginPage = ({ t, i18n }) => {
     <div className={s.root}>
       <div className={s.overlay} />
       <div className={s.mask} />
-      <LanguageWrapper t={t} handleLangOnChange={handleLangOnChange} />
+      <LanguageWrapper handleLangOnChange={handleLangOnChange} />
       <PromotionText t={t} />
       <div className={s.formContainer}>
         {{
-          LOGIN: <React.Fragment>
+          LOGIN: <Fragment>
             <div className={s.logoContainer}>
               <div className={s.logo} />
               <p>Booking</p>
             </div>
             <div className={s.col}>
               <CustomInput
+                outline
                 label={t('email')}
                 value={loginData.username}
-                onChange={(e) => handleLoginOnChange('username', e.target.value)}
+                onChange={(e) => handleLoginOnChange('username', (e.target as HTMLTextAreaElement).value)}
               />
             </div>
             <div className={s.col}>
               <CustomInput
+                outline
                 type='password'
                 label={t('password')}
                 value={loginData.password}
-                onChange={(e) => handleLoginOnChange('password', e.target.value)}
+                onChange={(e) => handleLoginOnChange('password', (e.target as HTMLTextAreaElement).value)}
               />
             </div>
             <div className={s.forgetpw}>
@@ -70,39 +78,44 @@ const LoginPage = ({ t, i18n }) => {
             <Button className={s.loginBtn} onClick={() => setActionType(REGISTER)}>
               {t('login.register')}
             </Button>
-          </React.Fragment>,
-          REGISTER: <React.Fragment>
+          </Fragment>,
+          REGISTER: <Fragment>
             <div className={s.row} onClick={() => setActionType(LOGIN)}>
               <LeftOutlined />
               <p>{t('general.back')}</p>
             </div>
             <div className={s.col}>
               <CustomInput
+                outline
                 label={t('email')}
                 reg={/^[^\s@]+@[^\s@]+\.[^\s@]+$/}
                 value={loginData.username}
-                onChange={(e) => handleLoginOnChange('username', e.target.value)}
+                onChange={(e) => handleLoginOnChange('username', (e.target as HTMLTextAreaElement).value)}
               />
             </div>
             <div className={s.col}>
               <CustomInput
+                outline
                 type='password'
                 label={t('password')}
                 value={loginData.password}
-                onChange={(e) => handleLoginOnChange('password', e.target.value)}
+                onChange={(e) => handleLoginOnChange('password', (e.target as HTMLTextAreaElement).value)}
               />
             </div>
             <Button className={s.loginBtn} onClick={() => { }}>
               {t('login.create')}
             </Button>
-          </React.Fragment>
+          </Fragment>
         }[actionType]}
       </div>
     </div>
   )
 }
 
-const LanguageWrapper = ({ handleLangOnChange }) => {
+
+const LanguageWrapper = ({ handleLangOnChange }: {
+  handleLangOnChange: MouseEventHandler
+}) => {
   return (
     <div className={s.langWrapper}>
       <div
@@ -124,7 +137,11 @@ const LanguageWrapper = ({ handleLangOnChange }) => {
   )
 }
 
-const PromotionText = ({ t }) => {
+interface PromotionTextProps {
+  t: any
+}
+
+const PromotionText: FC<PromotionTextProps> = ({ t }) => {
   return (
     <div className={s.descriptionWrapper}>
       <div className={s.title}>

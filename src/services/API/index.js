@@ -1,7 +1,7 @@
 import axios from 'axios';
 import auth from './auth';
 import test from './test';
-import { VERSION, SERVER_URL } from 'constant';
+import { VERSION, SERVER_URL } from '../../constant';
 
 class BaseApi {
   constructor() {

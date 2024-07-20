@@ -1,12 +1,21 @@
-import React, { isValidElement, useId } from 'react';
+import React, { isValidElement, useId, ReactNode, FC } from 'react';
 import s from './MenuItem.module.scss';
 import cx from 'classnames';
+import noop from 'lodash/noop';
 
-const MenuItem = ({
-  selectedValue,
+export interface MenuItemProps {
+  selectedValue?: string,
+  value: string,
+  icon: ReactNode,
+  itemOnClick?: (value: string) => void,
+  children: ReactNode,
+}
+
+const MenuItem: FC<MenuItemProps> = ({
+  selectedValue='',
   value,
   icon: Icon,
-  itemOnClick = (value) => { },
+  itemOnClick = (value: string) => { },
   children,
 }) => {
   const id = useId();
@@ -25,5 +34,5 @@ const MenuItem = ({
   )
 }
 
-MenuItem.displayName = 'MenuItem'
+MenuItem.displayName = 'MenuItem';
 export default MenuItem;
