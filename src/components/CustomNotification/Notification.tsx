@@ -1,5 +1,9 @@
 import CustomNotification from "./CustomNotification";
-import { MESSAGE_TYPE, DURATION, POSITION } from "./constants";
+import {
+  MESSAGE_TYPE,
+  DURATION, POSITION,
+  CustomNotificationProps,
+} from "./constants";
 import ReactDOM from 'react-dom/client';
 
 export const noti = (
@@ -10,17 +14,18 @@ export const noti = (
     duration: DURATION,
   },
 ) => {
-  const containerNode = document.createElement('div');
+  const containerNode: HTMLDivElement = document.createElement('div');
   const notiRoot = ReactDOM.createRoot(containerNode);
 
-  const config = {
+  const config: CustomNotificationProps = {
     messageType,
     message,
     position: options.position,
     duration: options.duration,
-    notiRoot,
     containerNode,
+    unmountFromRoot: notiRoot.unmount,
   }
+
   notiRoot.render(<CustomNotification {...config} />);
   document.body.appendChild(containerNode);
 }

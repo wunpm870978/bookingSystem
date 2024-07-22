@@ -12,11 +12,6 @@ const Test = lazy(() => import('./routes/Test'));
 // const ShopTable = lazy(() => import('./routes/shop/ShopTable'));
 
 function App() {
-  // useEffect(() => {
-  //   API.test.test()
-  //     .then((res) => console.log('test', res.data))
-  //     .catch((err) => console.log('test', err))
-  // }, [])
 
   return (
     <BrowserRouter>

@@ -89,8 +89,8 @@ const LoginPage: FC<LoginPageProps> = ({ t, i18n }) => {
                 outline
                 label={t('email')}
                 reg={/^[^\s@]+@[^\s@]+\.[^\s@]+$/}
-                value={loginData.username}
-                onChange={(e) => handleLoginOnChange('username', (e.target as HTMLTextAreaElement).value)}
+                value={registerData.email}
+                onChange={(e) => handleRegisterOnChange('email', (e.target as HTMLTextAreaElement).value)}
               />
             </div>
             <div className={s.col}>
@@ -98,11 +98,11 @@ const LoginPage: FC<LoginPageProps> = ({ t, i18n }) => {
                 outline
                 type='password'
                 label={t('password')}
-                value={loginData.password}
-                onChange={(e) => handleLoginOnChange('password', (e.target as HTMLTextAreaElement).value)}
+                value={registerData.password}
+                onChange={(e) => handleRegisterOnChange('password', (e.target as HTMLTextAreaElement).value)}
               />
             </div>
-            <Button className={s.loginBtn} onClick={() => { }}>
+            <Button className={s.loginBtn} onClick={registerOnSubmit}>
               {t('login.create')}
             </Button>
           </Fragment>

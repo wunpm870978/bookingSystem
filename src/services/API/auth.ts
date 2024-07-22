@@ -1,14 +1,15 @@
-import API from './index';
+import Instance from './config';
+import { RegisterObj } from 'routes/login/LoginConstants';
 
 export default {
-  authMe({ username, password }) {
-    return API.API({
+  authMe({ username, password }: { username: String; password: string }) {
+    return Instance.Create({
       method: 'POST',
       url: `/auth/me/`,
       data: { username, password },
     });
   },
-  login({ username, password }) {
+  login({ username, password }: { username: String; password: string }) {
     // return new Promise((resolve) => {
     //   resolve({
     //     data: {
@@ -17,14 +18,14 @@ export default {
     //     status: 200
     //   })
     // })
-    return API.API({
+    return Instance.Create({
       method: 'POST',
       url: `/auth/login/`,
       data: { username, password },
     });
   },
-  register(payload) {
-    return API.API({
+  register(payload: RegisterObj) {
+    return Instance.Create({
       method: 'POST',
       url: `/auth/register/`,
       data: payload,

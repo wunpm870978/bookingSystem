@@ -1,23 +1,27 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, FC } from 'react';
 import s from './CustomNotification.module.scss';
 import cx from 'classnames';
-import { PropTypes } from 'prop-types';
-import { POSITION, MESSAGE_TYPE } from './constants';
+import {
+  POSITION,
+  MESSAGE_TYPE,
+  CustomNotificationProps,
+  DURATION,
+} from './constants';
 
-const CustomNotification = ({
-  position,
-  messageType,
-  message,
-  duration,
+const CustomNotification: FC<CustomNotificationProps> = ({
+  position = POSITION.TOP,
+  messageType = MESSAGE_TYPE.INFO,
+  message = '',
+  duration = DURATION,
   containerNode,
-  notiRoot,
+  unmountFromRoot,
 }) => {
-  const timeoutRef = useRef(null);
-  const closeTimeoutRef = useRef(null);
-  const [visible, setVisible] = useState(true);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const closeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const [visible, setVisible] = useState<boolean>(true);
 
   useEffect(() => {
-    if (duration !== '-') {
+    if (duration && duration !== -1) {
       timeoutRef.current = setTimeout(() => {
         setVisible(false);
       }, duration)
@@ -31,7 +35,8 @@ const CustomNotification = ({
   useEffect(() => {
     if (!visible) {
       closeTimeoutRef.current = setTimeout(() => {
-        notiRoot.unmount()
+        // notiRoot.unmount()
+        unmountFromRoot();
         document.body.removeChild(containerNode);
       }, 400)
     }
@@ -53,28 +58,16 @@ const CustomNotification = ({
   )
 }
 
-const Icon = ({ messageType }) => {
+interface IconProps {
+  messageType: string
+}
+
+const Icon: FC<IconProps> = ({ messageType }) => {
   return <img
     className={s[messageType]}
     src={`/assets/svg/${messageType}.svg`}
     alt=''
   />
-}
-
-CustomNotification.defaultProps = {
-  position: POSITION.TOP,
-  messageType: MESSAGE_TYPE.INFO,
-  message: '',
-  duration: 3000,
-}
-CustomNotification.propTypes = {
-  position: PropTypes.string,
-  messageType: PropTypes.string,
-  message: PropTypes.string,
-  duration: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number
-  ]),
 }
 
 export default CustomNotification;
