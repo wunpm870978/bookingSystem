@@ -39,4 +39,12 @@ export default {
       params,
     });
   },
+  resentOtp(email: string, shop_id: string) {
+    const params = { email, shop_id };
+    return Instance.Create({
+      method: 'GET',
+      url: `/auth/remake/`,
+      params,
+    });
+  }
 }

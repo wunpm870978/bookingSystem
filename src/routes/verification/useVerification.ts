@@ -29,7 +29,15 @@ const useVerification = ({ user, t }: useVerificationProps) => {
   }
 
   const resentOTP = () => {
+    if (user) {
+      API.auth.resentOtp(user.email, user.shop_id)
+        .then(() => {
+          noti('success', t('login.register_201'))
+        })
+        .catch((err) => {
 
+        })
+    }
   }
 
   /**
@@ -47,7 +55,7 @@ const useVerification = ({ user, t }: useVerificationProps) => {
           navigate("/", { replace: true });
         })
         .catch((err) => {
-          noti('success', t('login.verify_fail'));
+          noti('warning', t('login.verify_fail'));
         })
         .finally(() => setLoading(false));
     }

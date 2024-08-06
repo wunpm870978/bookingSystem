@@ -1,27 +1,32 @@
 import CustomNotification from "./CustomNotification";
 import {
-  MESSAGE_TYPE,
-  DURATION, POSITION,
+  MessagePosition,
+  DURATION,
   CustomNotificationProps,
+  MessageType,
+  NotiOptions,
 } from "./constants";
 import ReactDOM from 'react-dom/client';
 
 export const noti = (
-  messageType = MESSAGE_TYPE.INFO,
-  message = '',
-  options = {
-    position: POSITION.TOP,
-    duration: DURATION,
-  },
+  messageType: MessageType,
+  message: string = '',
+  options?: NotiOptions,
 ) => {
   const containerNode: HTMLDivElement = document.createElement('div');
   const notiRoot = ReactDOM.createRoot(containerNode);
 
+  const defaultOptions: NotiOptions = {
+    position: 'top',
+    duration: DURATION,
+  };
+
+  const { position, duration } = { ...defaultOptions, ...options };
   const config: CustomNotificationProps = {
     messageType,
     message,
-    position: options.position,
-    duration: options.duration,
+    position: position as MessagePosition,
+    duration: duration as number,
     containerNode,
     notiRoot,
   }

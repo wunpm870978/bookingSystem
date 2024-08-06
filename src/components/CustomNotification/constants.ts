@@ -18,9 +18,16 @@ export const MESSAGE_TYPE = {
 
 export const DURATION = 3000;
 
+export type MessageType = 'info' | 'warning' | 'success' | 'error';
+export type MessagePosition = 'top' | 'topLeft' | 'topRight' | 'bottom' | 'bottomLeft' | 'bottomRight';
+export interface NotiOptions {
+  position?: MessagePosition,
+  duration?: number
+}
+
 export interface CustomNotificationProps {
-  position: string,
-  messageType: string,
+  position: MessagePosition,
+  messageType: MessageType,
   message: string,
   duration: number,
   containerNode: HTMLElement,

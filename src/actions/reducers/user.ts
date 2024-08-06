@@ -27,6 +27,7 @@ const userReducer = createSlice({
   reducers: {
     updateUser(state, action: PayloadAction<UserObj>) {
       state.user = action.payload;
+      sessionStorage.setItem('user', JSON.stringify(action.payload));
     },
     login(state, action: PayloadAction<UserState>) {
       const { user, access_token, refresh_token } = action.payload;
