@@ -23,7 +23,7 @@ export const noti = (
     position: options.position,
     duration: options.duration,
     containerNode,
-    unmountFromRoot: notiRoot.unmount,
+    notiRoot,
   }
 
   notiRoot.render(<CustomNotification {...config} />);

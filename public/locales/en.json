@@ -3,7 +3,7 @@
   "email": "Email",
   "password": "Password",
   "error": {
-    "unknown":"Something happened. Please contact us."
+    "unknown": "Something happened. Please contact us."
   },
   "login": {
     "login": "Login",
@@ -16,7 +16,19 @@
     "title_2": "Better for Everyone",
     "description": "Bookin YL is dedicated to automating and optimizing management system, assits you planning of time. Boost productivity today!",
     "login_fail": "Incorrect email or password",
-    "login_err": "Something"
+    "register_err": "Incorrect email or password format",
+    "register_fail": "Something goes wrong",
+    "register_201": "Email verification sent. Please check your mail box.",
+    "register_403": "Please verify your email",
+    "register_404": "Something goes wrong",
+    "register_409": "Email is already registered",
+    "login_err": "Something",
+    "verify_success": "Successfully verified",
+    "verify_fail": "Failed to verify. Please check your OTP code or resent email.",
+    "otp_desc_1": "We have sent an OTP code to your Email",
+    "otp_desc_2": "Enter the OTP code below to verify.",
+    "resent_otp_1": "Didn't receive Code?",
+    "resent_otp_2": "Resend OTP"
   },
   "general": {
     "confirm": "Confirm",

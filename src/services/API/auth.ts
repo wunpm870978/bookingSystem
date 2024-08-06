@@ -31,4 +31,12 @@ export default {
       data: payload,
     });
   },
+  verify(otp: string, email: string, shop_id: string) {
+    const params = { otp, email, shop_id };
+    return Instance.Create({
+      method: 'GET',
+      url: `/auth/verify/`,
+      params,
+    });
+  },
 }

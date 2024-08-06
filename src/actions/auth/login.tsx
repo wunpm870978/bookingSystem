@@ -11,9 +11,12 @@ interface LoginAuthenticationProps {
 const LoginAuthentication: FC<LoginAuthenticationProps> = ({
   children
 }) => {
-  const user = useSelector((state: RootState) => state.user.user)
+  const user = useSelector((state: RootState) => state.user.user);
+  
   if (isEmpty(user)) {
     return <Navigate to="/login" replace />
+  } else if (!user.is_active) {
+    return <Navigate to="/verification" replace />
   }
   return children
 }

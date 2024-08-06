@@ -24,5 +24,5 @@ export interface CustomNotificationProps {
   message: string,
   duration: number,
   containerNode: HTMLElement,
-  unmountFromRoot: () => void,
+  notiRoot: any,
 }

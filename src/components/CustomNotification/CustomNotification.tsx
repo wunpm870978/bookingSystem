@@ -14,7 +14,7 @@ const CustomNotification: FC<CustomNotificationProps> = ({
   message = '',
   duration = DURATION,
   containerNode,
-  unmountFromRoot,
+  notiRoot,
 }) => {
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const closeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -35,8 +35,7 @@ const CustomNotification: FC<CustomNotificationProps> = ({
   useEffect(() => {
     if (!visible) {
       closeTimeoutRef.current = setTimeout(() => {
-        // notiRoot.unmount()
-        unmountFromRoot();
+        notiRoot.unmount()
         document.body.removeChild(containerNode);
       }, 400)
     }

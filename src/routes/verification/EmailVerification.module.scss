@@ -1,0 +1,102 @@
+.root {
+  position: relative;
+  padding: 20px 10px;
+
+  >* {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 320px;
+    width: 100%;
+  }
+
+  .imgContainer {
+    max-width: 500px;
+    margin: 10px auto;
+
+    >img {
+      object-fit: contain;
+      width: 100%;
+    }
+  }
+
+  .title {
+    font-size: 18px;
+  }
+
+  .desc {
+    display: flex;
+    column-gap: 10px;
+    font-size: 14px;
+    text-overflow: wrap;
+    flex-wrap: wrap;
+    text-align: justify;
+    margin: 10px auto;
+
+    >p {
+      word-break: break-all;
+      white-space: pre-line;
+      overflow-wrap: break-word;
+
+      >span {
+        width: fit-content;
+        font-weight: bold;
+        color: var(--theme-txt-color1);
+        margin: 0px 5px;
+      }
+    }
+  }
+
+  .digitContainer {
+    display: flex;
+    gap: 5px;
+    width: fit-content;
+    margin: 10px auto;
+
+    >* {
+      flex: 0 0 auto;
+    }
+
+    >input {
+      width: 40px;
+      height: 50px;
+      border-radius: 4px;
+      background-color: #f8f8f8;
+      border: transparent;
+      outline: none;
+      appearance: none;
+      text-align: center;
+      transition: border 0.3s ease-in-out;
+    }
+
+    >input::-webkit-outer-spin-button,
+    >input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    >input[type=number] {
+      -moz-appearance: textfield;
+    }
+
+    >input:focus {
+      border: 1px solid var(--theme-primary-color);
+    }
+  }
+
+  .center{
+    text-align: center;
+  }
+
+  .resentBtnContainer {
+    margin-top: 15px;
+
+    >a {
+      cursor: pointer;
+      color: #1677ff;
+    }
+
+    >a:hover {
+      color: #40c5f1;
+    }
+  }
+}

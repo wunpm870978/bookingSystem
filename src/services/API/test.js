@@ -1,8 +1,8 @@
-import API from './index';
+import Instance from './config';
 
 export default {
   test() {
-    return API.API({
+    return Instance.Create({
       method: 'GET',
       url: '/',
     });

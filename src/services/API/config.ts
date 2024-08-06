@@ -4,7 +4,7 @@ import axios, { HeadersDefaults, CreateAxiosDefaults, RawAxiosRequestHeaders } f
 interface HeaderObj extends HeadersDefaults {
   'Access-Control-Allow-Origin': string,
   'x-version': string,
-  'Content-Type': string[],
+  'Content-Type'?: string,
   Authorization?: string,
   common: RawAxiosRequestHeaders,
   delete: RawAxiosRequestHeaders,
@@ -44,12 +44,6 @@ class Instance {
         //   port: 8030
         // },
         'x-version': VERSION,
-        'Content-Type': [
-          'text/plain',
-          'application/json',
-          'multipart/form-data',
-          'application/x-www-form-urlencoded'
-        ],
         common: {},
         delete: {},
         get: {},

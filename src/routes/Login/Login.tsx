@@ -1,10 +1,7 @@
-import { Fragment, FC, ChangeEvent, MouseEventHandler } from "react";
-import { useSelector } from "react-redux";
+import { Fragment, FC, MouseEventHandler } from "react";
 import { LeftOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
 import s from './Login.module.scss';
-import isEmpty from "lodash/isEmpty";
-import { Navigate } from "react-router-dom";
 import { withTranslation } from 'react-i18next';
 import CustomInput from "../../components/CustomInput/CustomInput";
 import useLogin from "./useLogin";
@@ -12,7 +9,6 @@ import {
   LOGIN,
   REGISTER,
 } from "./LoginConstants";
-import { RootState } from "../../actions/store";
 
 interface LoginPageProps {
   t: any,
@@ -21,13 +17,9 @@ interface LoginPageProps {
 
 const LoginPage: FC<LoginPageProps> = ({ t, i18n }) => {
   const {
-    user
-  } = useSelector((state: RootState) => ({
-    user: state.user.user
-  }))
-  const {
     loginData,
     registerData,
+    isLoading,
     actionType, setActionType,
     handleLoginOnChange,
     handleRegisterOnChange,
@@ -36,8 +28,7 @@ const LoginPage: FC<LoginPageProps> = ({ t, i18n }) => {
     registerOnSubmit,
   } = useLogin({ t, i18n });
 
-
-  if (!isEmpty(user)) return <Navigate to="/" replace={true} />
+  // if (!isEmpty(user)) return <Navigate to="/" replace={true} />
   return (
     <div className={s.root}>
       <div className={s.overlay} />
@@ -75,7 +66,11 @@ const LoginPage: FC<LoginPageProps> = ({ t, i18n }) => {
               {t('login.login')}
             </Button>
             <div className={s.divider} />
-            <Button className={s.loginBtn} onClick={() => setActionType(REGISTER)}>
+            <Button
+              className={s.loginBtn}
+              onClick={() => setActionType(REGISTER)}
+              loading={isLoading}
+            >
               {t('login.register')}
             </Button>
           </Fragment>,
@@ -102,7 +97,11 @@ const LoginPage: FC<LoginPageProps> = ({ t, i18n }) => {
                 onChange={(e) => handleRegisterOnChange('password', (e.target as HTMLTextAreaElement).value)}
               />
             </div>
-            <Button className={s.loginBtn} onClick={registerOnSubmit}>
+            <Button
+              className={s.loginBtn}
+              onClick={registerOnSubmit}
+              loading={isLoading}
+            >
               {t('login.create')}
             </Button>
           </Fragment>
