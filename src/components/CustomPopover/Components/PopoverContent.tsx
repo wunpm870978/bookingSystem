@@ -1,11 +1,28 @@
-import React, { useCallback, useEffect, useState, useRef, useId } from 'react';
+import React, {
+  FC,
+  useCallback,
+  useEffect,
+  useState,
+  useRef,
+  useId,
+  ReactNode
+} from 'react';
 import ReactDom from 'react-dom';
 import Overlay from 'components/Overlay/Overlay';
 import cx from 'classnames';
 import s from './PopoverContent.module.scss';
 import get from 'lodash/get';
 
-const PopoverContent = ({
+interface PopoverContentProps {
+  isOpen: boolean,
+  onClose: () => void,
+  position: string,
+  maskEnabled: boolean,
+  targetRef: HTMLElement | null,
+  children: ReactNode
+}
+
+const PopoverContent: FC<PopoverContentProps> = ({
   isOpen = false,
   onClose = () => { },
   position = 'left',
@@ -15,19 +32,19 @@ const PopoverContent = ({
 }) => {
   const [visible, setVisible] = useState(false);
   const id = useId();
-  const contentRef = useRef(null);
-  const timeoutRef = useRef(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const timeoutRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
-  const onNotFocus = useCallback((e) => {
+  const onNotFocus = useCallback((e: MouseEvent) => {
     if (
-      targetRef.contains(e.target) ||
-      !contentRef.current.contains(e.target)
+      (targetRef && targetRef.contains(e.target as Node)) ||
+      (contentRef.current && !contentRef.current.contains(e.target as Node))
     ) {
       onClose();
     }
   }, [targetRef]);
 
-  const getPosition = useCallback((isReturnEmpty) => {
+  const getPosition = useCallback((isReturnEmpty: boolean) => {
     if (isReturnEmpty) return {};
     if (targetRef) {
       const rect = targetRef.getBoundingClientRect();

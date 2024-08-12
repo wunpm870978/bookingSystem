@@ -13,7 +13,7 @@ export const passwordEncryption = (plaintext: string) => {
   return encryption.sha512(processedPlaintext)
 }
 
-export const getDifference2 = (object: object, base: object) => {
+export const getDifference = (object: object, base: object) => {
   function changes(obj: object, baseObj: any) {
     return transform(obj, (result: any, value, key: string) => {
       if (!isEqual(value, baseObj[key])) {

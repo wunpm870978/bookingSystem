@@ -1,17 +1,17 @@
-import React, { useState, memo } from 'react';
+import React, { FC, useState, memo } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import s from './UserButton.module.scss';
 import CustomPopover from 'components/CustomPopover/CustomPopover';
 import { logout } from 'actions/reducers/user';
 import { LogoutOutlined } from '@ant-design/icons';
+import { RootState, AppDispatch } from 'actions/store';
+import get from 'lodash/get';
 
-const UserButton = () => {
-  const {
-    userName
-  } = useSelector((state) => ({
-    userName: state.user.user.name
+const UserButton: FC = () => {
+  const user = useSelector((state: RootState) => ({
+    userName: state.user.user
   }))
-  const dispatch = useDispatch()
+  const dispatch = useDispatch<AppDispatch>()
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   return (
@@ -32,7 +32,7 @@ const UserButton = () => {
         className={s.root}
         onClick={() => setIsDropdownOpen(true)}
       >
-        <p>{userName}</p>
+        <p>{get(user, 'name')}</p>
         <div className={s.down} />
       </div>
     </CustomPopover>

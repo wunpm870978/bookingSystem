@@ -1,9 +1,16 @@
 import { VERSION, SERVER_URL } from '../../constant';
-import axios, { HeadersDefaults, CreateAxiosDefaults, RawAxiosRequestHeaders } from 'axios';
+import axios, {
+  HeadersDefaults,
+  CreateAxiosDefaults,
+  RawAxiosRequestHeaders,
+  AxiosResponse
+} from 'axios';
+import cloneDeep from 'lodash/cloneDeep';
 
 interface HeaderObj extends HeadersDefaults {
   'Access-Control-Allow-Origin': string,
   'x-version': string,
+  'grant-type'?: string,
   'Content-Type'?: string,
   Authorization?: string,
   common: RawAxiosRequestHeaders,
@@ -31,7 +38,6 @@ interface reqestOptionProps {
 
 class Instance {
   requestOptions: requestOptionsObj;
-  Create: (props: reqestOptionProps, count?: number) => Promise<any>;
 
   constructor() {
     this.requestOptions = {
@@ -52,23 +58,55 @@ class Instance {
         put: {},
         patch: {},
       },
-      timeout: 60000,
+      timeout: 10000, // milliseconds
     }
+  }
 
-    this.Create = async (props, count = 3) => {
-      return await new Promise((resolve, reject) => {
-        axios.create(this.requestOptions)(props)
-          .then(res => resolve(res))
-          .catch((err) => {
-            if (count === 0) {
-              if (err.response.status === 401) {
-                return resolve(this.Create(props, count--))
-              }
-            }
+  async create(props: reqestOptionProps, count: number = 3): Promise<AxiosResponse> {
+    return await new Promise((resolve, reject) => {
+      const requestOptions = cloneDeep(this.requestOptions);
+      const token = sessionStorage.getItem('access_token');
+      if (token) {
+        requestOptions.headers['grant-type'] = 'access';
+        requestOptions.headers.Authorization = 'Bearer ' + token
+      }
+      axios.create(requestOptions)(props)
+        .then(res => resolve(res))
+        .catch(async (err) => {
+          if (err.response.status === 498 && count > 0) {
+            await this.rertieveToken(cloneDeep(requestOptions), reject);
+            return resolve(this.create(props, count--));
+          } else {
             reject(err)
-          })
-      })
+          }
+        })
+    })
+  }
+
+  async rertieveToken(requestOptions: requestOptionsObj, reject: (reason?: any) => void) {
+    const token = sessionStorage.getItem('refresh_token');
+    if (token) {
+      requestOptions.headers['grant-type'] = 'refresh';
+      requestOptions.headers.Authorization = 'Bearer ' + token
     }
+    else return;
+    return await axios.create(requestOptions)({
+      url: `/auth/me/`,
+      method: 'GET',
+    })
+      .then((res) => {
+        const { refresh_token, access_token } = res.data;
+        if (refresh_token && access_token) {
+          sessionStorage.setItem('refresh_token', refresh_token);
+          sessionStorage.setItem('access_token', access_token);
+        }
+      })
+      .catch((err) => {
+        // dispatch logout event to clear session and redux state
+        const event = new Event('logout')
+        document.dispatchEvent(event);
+        reject(err);
+      })
   }
 }
 

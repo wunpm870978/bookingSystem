@@ -1,4 +1,5 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
+import API from 'services/API';
 
 export interface UserObj {
   shop_id: string,
@@ -11,8 +12,8 @@ export interface UserObj {
 
 interface UserState {
   user: UserObj | null,
-  access_token: string | null,
-  refresh_token: string | null,
+  access_token?: string | null,
+  refresh_token?: string | null,
 }
 
 const userState: UserState = {
@@ -20,6 +21,17 @@ const userState: UserState = {
   access_token: null,
   refresh_token: null,
 }
+
+export const logout = createAsyncThunk(
+  'user/logout',
+  async (_, { rejectWithValue }) => {
+    try {
+      await API.auth.logout();
+    } catch (err) {
+      return rejectWithValue(err);
+    }
+  }
+);
 
 const userReducer = createSlice({
   name: 'user',
@@ -32,20 +44,26 @@ const userReducer = createSlice({
     login(state, action: PayloadAction<UserState>) {
       const { user, access_token, refresh_token } = action.payload;
       state.user = user;
-      state.access_token = access_token;
-      state.refresh_token = refresh_token;
       sessionStorage.setItem('user', JSON.stringify(user));
       sessionStorage.setItem('access_token', access_token || '');
       sessionStorage.setItem('refresh_token', refresh_token || '');
     },
-    logout(state) {
+    clearUser(state) {
       state.user = null;
-      state.access_token = null;
-      state.refresh_token = null;
       sessionStorage.clear();
-    },
+    }
+  },
+  extraReducers: (builder) => {
+    builder.addCase(logout.fulfilled, (state) => {
+      state.user = null;
+      sessionStorage.clear();
+    });
+    builder.addCase(logout.rejected, (state) => {
+      state.user = null;
+      sessionStorage.clear();
+    });
   },
 })
 
-export const { updateUser, logout, login } = userReducer.actions;
+export const { updateUser, login, clearUser } = userReducer.actions;
 export default userReducer.reducer;

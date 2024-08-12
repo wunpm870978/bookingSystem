@@ -57,6 +57,7 @@ function App() {
           {/* <Route path='course' element={<CourseTable />} /> */}
           {/* <Route path='course2' element={<CourseEnrollment />} /> */}
           {/* <Route path='schedule' element={<ScheduleLayout />} /> */}
+          <Route index path='*' element={<Test />} />
         </Route>
         {/* <Route path='/' element={<Test2 />} /> */}
         {/* <Route index path='*' element={<Test2 />} /> */}

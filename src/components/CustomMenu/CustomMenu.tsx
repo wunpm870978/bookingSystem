@@ -4,6 +4,7 @@ import {
   cloneElement,
   useId,
   ReactNode,
+  isValidElement,
 } from 'react';
 import s from './CustomMenu.module.scss';
 import MenuItem, { MenuItemProps } from './Components/MenuItem';
@@ -15,10 +16,16 @@ interface CustomMenuProps {
   children: ReactNode,
 }
 
-const CustomMenu: FC<CustomMenuProps> & {
+interface CustomMenuComponent extends FC<CustomMenuProps> {
   Item: FC<MenuItemProps>,
   SubMenu: FC<SubMenuProps>
-} = ({ selectedValue, itemOnClick, children }) => {
+}
+
+const CustomMenu: CustomMenuComponent = ({
+  selectedValue,
+  itemOnClick,
+  children
+}: CustomMenuProps): JSX.Element => {
   const id = useId();
   const childProps = {
     selectedValue,
@@ -26,16 +33,13 @@ const CustomMenu: FC<CustomMenuProps> & {
   }
   return (
     <ul key={`menu_${id}`} className={s.root}>
-      {Children.map(children, (child: any) => {
-        if (!child || !child.displayName || ![
-          "MenuItem",
-          "SubMenu"
-        ].includes(child.displayName)) return null;
-        if (child.displayName === "MenuItem") {
+      {Children.map(children, (child: ReactNode) => {
+        if (isValidElement<MenuItemProps>(child)) {
           return cloneElement(child, childProps);
-        } else if (child.displayName === "SubMenu") {
+        } else if (isValidElement<SubMenuProps>(child)) {
           return cloneElement(child, childProps);
         }
+        return null;
       })}
     </ul>
   )
